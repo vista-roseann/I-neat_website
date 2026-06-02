@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I-neat | Features</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      color: #0A0A0A;
+    }
+
+    /* HEADER */
+    header.nav {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid #F3F4F6;
+      padding: 16px 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      margin: 0;
+      color: #0A0A0A;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #6A7282;
+      margin: 3px 0 0;
+    }
+
+    nav.menu {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    nav.menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav.menu a,
+    .menu-features {
+      font-size: 15px;
+      color: #4A5565;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-features {
+      padding: 8px 10px;
+      border: none;
+      background: none;
+      margin: 0;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active,
+    .menu-features:hover {
+      color: #155DFC;
+      background: #DBEAFE;
+    }
+
+    .desktop-features-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 0.5px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      padding: 8px 0;
+      width: 200px;
+      z-index: 9999;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .desktop-features-menu.open { display: block; }
+
+    .desktop-features-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      color: #4A5565;
+      font-size: 14px;
+      margin: 0;
+      transition: 0.2s ease;
+      border-radius: 0;
+      background: none;
+    }
+
+    .desktop-features-menu a:hover {
+      background: #F0FDFF;
+      color: #00B8DB;
+    }
+
+    .menu-features .chevron-down {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .menu-features.active .chevron-down {
+      transform: rotate(180deg);
+    }
+
+    .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4A5565;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  background: none;
+  transition: 0.2s ease;
+}
+
+.nav-btn.active {
+  background: #CEFAFE;
+  border-color: #00B8DB;
+  color: #0092B8;
+}
+
+.nav-btn:hover {
+  color: #4A5565 !important;
+}
+
+   /* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  }
+  .sub-item:hover { color: #00B8DB; }
+
+  .chevron {
+    transition: transform 0.2s;
+    font-size: 13px;
+  }
+  .chevron.rotated { transform: rotate(180deg); }
+
+  .home-btn:hover,
+  .feat-btn:hover {
+    color: #4A5565 !important;
+  }
+
+    /* MAIN */
+    main {
+      padding: 50px 20px 20px;
+    }
+
+    main h2 {
+      text-align: center;
+      font-size: clamp(32px, 5vw, 46px);
+      margin: 0 0 14px;
+      color: #0A0A0A;
+      font-weight: 800;
+    }
+
+    main > p {
+      text-align: center;
+      font-size: 16px;
+      color: #4A5565;
+      margin: 0 auto 44px;
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 1088px;
+      margin: 0 auto;
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 28px;
+      transition: 0.25s ease;
+      border: 1px solid #F3F4F6;
+      min-height: 230px;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+
+    .feature-icon-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      background: #DBEAFE;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .feature-icon-box i {
+      font-size: 24px;
+      color: #155DFC;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: #0A0A0A;
+      font-weight: 800;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #4A5565;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #F9FAFB;
+      border-top: 1px solid #F3F4F6;
+      padding: 40px 20px;
+      margin-top: 70px;
+      text-align: center;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .footer-text h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #0A0A0A;
+      font-weight: 800;
+    }
+
+    .footer-text p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #6A7282;
+    }
+
+    @media (max-width: 950px) {
+      header.nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+      }
+    }
+  
+
+/* =========================================================
+   RESPONSIVE FIX: phone / tablet / desktop friendly layout
+   ========================================================= */
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+/* Extra lock to prevent forced dark mode layout/color issues */
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="nav">
+    <div class="brand-group">
+      <img src="i-neat_logo.png" class="logo" alt="I-neat logo">
+      <div class="brand">
+        <h1>I-neat</h1>
+        <p>Stay Cool, Stay Safe</p>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+  <a href="index.html" class="home-btn" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+<div class="fly-menu" id="flyMenu">
+  <a class="menu-item" href="about.html">
+    <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+  </a>
+  <a class="menu-item" href="contact.html">
+    <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+  </a>
+</div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <h2>Smart Features That Save Lives</h2>
+    <p>From predictive alerts to crowdsourced cool zones, I-neat helps you act on heat data and make safer choices during hot or rainy weather.</p>
+
+    <div class="features">
+      <!-- Ice Breaker -->
+      <div class="card" onclick="window.location.href='icebreaker.html'">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <h3>Ice-Breaker Alerts</h3>
+        <p>Smart weather notifications that tell you what to wear, what to bring, and how to stay safe.</p>
+      </div>
+
+      <!-- Cool Finder -->
+      <div class="card" onclick="window.location.href='coolzones.html'">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <h3>Cool-Finder Map</h3>
+        <p>Find the nearest restaurant, café, mall, convenience store, supermarket, or library depending on your location.</p>
+      </div>
+
+      <!-- Heat-Sync Clothes -->
+      <div class="card" onclick="window.location.href='heatsync.html'">
+        <div class="feature-icon-box">
+          <i class="fa-solid fa-shirt"></i>
+        </div>
+        <h3>Heat-Sync Clothes</h3>
+        <p>Check if your outfit is safe for the weather and get suggestions to reduce heat discomfort.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <img src="i-neat_logo.png" class="footer-logo" alt="I-neat logo">
+      <div class="footer-text">
+        <h2>I-neat</h2>
+        <p>Stay Cool, Stay Safe</p>
+        <p>Turning the heat into data you can act on</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    
+  const hamBtn = document.getElementById('hamBtn');
+  const flyMenu = document.getElementById('flyMenu');
+  const featToggle = document.getElementById('featuresToggle');
+  const featuresSub = document.getElementById('featuresSub');
+  const chevron = document.getElementById('chevron');
+
+  document.addEventListener('click', (e) => {
+  if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+    flyMenu.classList.remove('open');
+  }
+});
+
+
+    // Mobile Menu
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+      if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+        desktopFeaturesMenu.classList.remove('open');
+        desktopFeaturesToggle.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I-neat | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root { color-scheme: light only; }
+
+    html {
+      color-scheme: light;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    img, svg, iframe, video, canvas { max-width: 100%; }
+    * { min-width: 0; }
+
+    /* HEAT PILL */
+    .heat-pill {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 310px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #CEFAFE;
+      border-radius: 999999px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0A0A0A;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+
+    /* HEADER */
+    header.nav {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid #F3F4F6;
+      padding: 16px 24px;
+      gap: 18px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      width: 64px !important;
+      height: 64px !important;
+      object-fit: contain !important;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      margin: 0;
+      color: #0A0A0A;
+      font-weight: 700;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: #6A7282;
+      margin: 3px 0 0 0;
+    }
+
+    /* HAMBURGER BUTTON */
+    .ham-btn {
+      background: none;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .ham-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #4A5565;
+      border-radius: 2px;
+    }
+
+    /* DESKTOP NAV MENU */
+    nav.menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin: 0;
+    }
+
+    nav.menu a,
+    .menu-features {
+      font-size: 15px;
+      color: #4A5565;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.3s ease;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-features {
+      padding: 0;
+      border: none;
+      background: none;
+      margin: 0;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active,
+    .menu-features:hover {
+      color: #2B7FFF;
+    }
+
+    .desktop-features-menu {
+      position: absolute;
+      top: 100%;
+      left: -8px;
+      background: white;
+      border: 0.5px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      padding: 8px 0;
+      width: 200px;
+      z-index: 9999;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .desktop-features-menu.open { display: block; }
+
+    .desktop-features-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      color: #4A5565;
+      font-size: 14px;
+      margin: 0;
+      transition: 0.2s ease;
+    }
+
+    .desktop-features-menu a:hover {
+      background: #F0FDFF;
+      color: #00B8DB;
+    }
+
+    .menu-features .chevron-down {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .menu-features.active .chevron-down {
+      transform: rotate(180deg);
+    }
+
+    /* FLYOUT MENU */
+    .fly-menu {
+      position: absolute;
+      top: 88px;
+      right: 24px;
+      background: white;
+      border: 0.5px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      padding: 10px 0;
+      width: 220px;
+      z-index: 9999;
+      display: none;
+    }
+
+    .fly-menu.open { display: block; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 18px;
+      font-size: 14px;
+      color: #4A5565;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+    .features-sub {
+      display: none;
+      background: #F8FAFB;
+      border-top: 0.5px solid #E5E7EB;
+      border-bottom: 0.5px solid #E5E7EB;
+    }
+
+    .features-sub.open { display: block; }
+
+    .sub-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px 8px 46px;
+      font-size: 13px;
+      color: #4A5565;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .sub-item:hover { color: #00B8DB; }
+
+    .chevron {
+      transition: transform 0.2s;
+      font-size: 13px;
+    }
+
+    .chevron.rotated { transform: rotate(180deg); }
+
+    .home-btn:hover,
+    .feat-btn:hover {
+      color: #4A5565 !important;
+    }
+
+    /* HOMEPAGE */
+    main.homepage {
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      padding: 40px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    main.homepage h2 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin-bottom: 20px;
+      color: #0A0A0A;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    main.homepage p {
+      font-size: clamp(14px, 2.7vw, 20px);
+      color: #4A5565;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    /* CARDS */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 200px;
+      font-family: 'Poppins', sans-serif;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      box-sizing: border-box;
+    }
+
+    .card h4 {
+      font-size: 32px;
+      margin: 0;
+      color: #0A0A0A;
+      font-weight: 700;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #4A5565;
+      margin: 8px 0 0;
+    }
+
+    #coolCount {
+      font-size: 20px;
+      line-height: 1.25;
+      word-break: normal;
+      overflow-wrap: anywhere;
+    }
+
+    #coolLabel { line-height: 1.4; }
+
+    #coolLabel a {
+      color: #2B7FFF;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    #coolLabel a:hover { text-decoration: underline; }
+
+    /* OVERVIEW */
+    .overview {
+      margin: 60px auto;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .overview h3 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #0092B8;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .overview p {
+      font-size: 18px;
+      color: #4A5565;
+      margin-bottom: 30px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .overview ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .overview li {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      flex: 1 1 220px;
+      max-width: 300px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .overview li h4 {
+      font-size: 22px;
+      color: #0A0A0A;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .overview li p {
+      font-size: 14px;
+      color: #4A5565;
+    }
+
+    /* CTA BUTTON */
+    .cta-btn {
+      display: inline-block;
+      margin-top: 35px;
+      padding: 14px 28px;
+      background: #00B8DB;
+      color: white;
+      text-decoration: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover { background: #2B7FFF; }
+
+    /* FOOTER */
+    footer {
+      background: #F9FAFB;
+      border-top: 1px solid #F3F4F6;
+      padding: 40px 20px;
+      margin-top: 60px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .footer-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 70px !important;
+      height: 70px !important;
+      object-fit: contain !important;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .footer-text h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #0A0A0A;
+    }
+
+    .footer-text p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #6A7282;
+    }
+
+    /* INSIGHTS ROW */
+    .insights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .insights .card {
+      flex: 1 1 220px;
+      max-width: 300px;
+    }
+
+    /* MAP BOX */
+    .map-box {
+      height: clamp(320px, 58vh, 480px) !important;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header.nav {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 14px 16px !important;
+      }
+
+      .fly-menu {
+        right: 50%;
+        transform: translateX(50%);
+        top: 110px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .heat-pill { display: none !important; }
+
+      main, main.homepage {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+
+      .brand h1 { font-size: 20px !important; }
+    }
+
+    body, header.nav, footer, .card, .overview li {
+      forced-color-adjust: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Heat Pill -->
+  <div class="heat-pill">
+    <i class="fa-solid fa-fire"></i>
+    <span>I-neat Heat Monitor</span>
+  </div>
+
+  <!-- Header -->
+  <header class="nav">
+    <div class="brand-group">
+      <img src="i-neat_logo.png" class="logo" alt="I-neat logo">
+      <div class="brand">
+        <h1>I-neat</h1>
+        <p>Stay Cool, Stay Safe</p>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+  <a href="features.html" class="feat-btn" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-star"></i> Features
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<div class="fly-menu" id="flyMenu">
+  <a class="menu-item" href="about.html">
+    <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+  </a>
+  <a class="menu-item" href="contact.html">
+    <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+  </a>
+</div>
+  </header>
+
+  <!-- Homepage -->
+  <main class="homepage">
+
+    <h2>Your Personal Heat Bodyguard</h2>
+    <p>Because a bad day at the office shouldn't end in an Emergency Room</p>
+
+    <!-- Heat Map Section -->
+    <section style="margin: 40px auto; max-width: 900px;">
+
+      <!-- Location + Temp Bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <i class="fas fa-map-marker-alt" style="color: #EF4444;"></i>
+          <span id="locationLabel" style="font-size: 15px; font-weight: 600; color: #0A0A0A;">Detecting location...</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="background: rgba(239,68,68,0.1); border-radius: 999px; padding: 6px 18px; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-thermometer-half" style="color: #EF4444;"></i>
+            <span id="currentTemp" style="font-size: 18px; font-weight: 700; color: #EF4444;">--°C</span>
+            <span id="heatStatus" style="font-size: 13px; font-weight: 600; color: #4A5565; text-transform: uppercase;">Loading</span>
+          </div>
+          <div style="background: rgba(0,184,219,0.1); border-radius: 999px; padding: 6px 18px; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-tint" style="color: #00B8DB;"></i>
+            <span id="humidity" style="font-size: 15px; font-weight: 600; color: #00B8DB;">--%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Container -->
+      <div style="position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0px 4px 16px rgba(0,0,0,0.12); border: 2px solid #E5E7EB;">
+        <div id="map" style="width: 100%; height: 420px; background: #E0F2F7;"></div>
+
+        <!-- Map Legend -->
+        <div style="position: absolute; bottom: 16px; left: 16px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 1000;">
+          <p style="margin: 0 0 8px; font-size: 12px; font-weight: 700; color: #0A0A0A; text-transform: uppercase;">Map Legend</p>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #4A5565;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#DC2626" stroke="white" stroke-width="1.2"/><circle cx="12" cy="9" r="3" fill="white"/></svg>
+              You (Your Location)
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #4A5565;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#38BDF8" stroke="white" stroke-width="1.2"/><circle cx="12" cy="9" r="3" fill="white"/></svg>
+              Cool Zones (Malls, Cafes, Stores)
+            </div>
+          </div>
+        </div>
+
+        <!-- Heat Overlay Badge -->
+        <div id="heatBadge" style="position: absolute; top: 16px; right: 16px; background: rgba(239,68,68,0.92); color: white; border-radius: 12px; padding: 10px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+          <div id="badgeTemp" style="font-size: 28px; font-weight: 800; line-height: 1;">--°C</div>
+          <div id="badgeLabel" style="font-size: 11px; font-weight: 700; text-transform: uppercase; opacity: 0.9; margin-top: 2px;">Loading</div>
+        </div>
+      </div>
+
+      <!-- Insights Cards -->
+      <div class="insights" style="margin-top: 24px;">
+        <div class="card">
+          <h4 id="peakTemp">--°C</h4>
+          <p>Today's Peak Temperature</p>
+        </div>
+        <div class="card">
+          <h4 id="waterNeeded">--L</h4>
+          <p>Water Needed for Today</p>
+        </div>
+        <div class="card">
+          <h4 id="safeSun">--min</h4>
+          <p>Safe Sun Time Remaining</p>
+        </div>
+        <div class="card">
+          <h4 id="coolCount">--</h4>
+          <p id="coolLabel">Nearest Cool Zone</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Overview Section -->
+    <section class="overview">
+      <h3>Why I-neat Matters</h3>
+      <p>Our smart features transform raw heat data into life-saving insights to help people stay protected during extreme weather conditions.</p>
+      <ul>
+        <li>
+          <h4>Heat Alerts</h4>
+          <p>Get notified when temperatures reach dangerous levels.</p>
+        </li>
+        <li>
+          <h4>Cool Zones</h4>
+          <p>Find nearby cooling stations and safe locations instantly.</p>
+        </li>
+        <li>
+          <h4>Hydration Guide</h4>
+          <p>Track your recommended water intake every day.</p>
+        </li>
+      </ul>
+      <a href="features.html" class="cta-btn">Explore Features</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <img src="i-neat_logo.png" class="footer-logo" alt="I-neat logo">
+      <div class="footer-text">
+        <h2>I-neat</h2>
+        <p>Stay Cool, Stay Safe</p>
+        <p>Turning the heat into data you can act on</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hamburger Menu JS -->
+  <script>
+    const hamBtn = document.getElementById('hamBtn');
+    const flyMenu = document.getElementById('flyMenu');
+    const featToggle = document.getElementById('featuresToggle');
+    const featuresSub = document.getElementById('featuresSub');
+    const chevron = document.getElementById('chevron');
+
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+    });
+  </script>
+
+  <!-- Map + Weather JS -->
+  <script>
+    let map, userMarker, coolZoneLayer, userPosition, moveLocationButton, nearestMarker;
+    const weatherCache = new Map();
+
+    function initApp() {
+      const fallbackLat = 14.636;
+      const fallbackLon = 121.073;
+      const fallbackLocation = 'Antipolo, PH';
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          ({ coords }) => initMap(coords.latitude, coords.longitude, 'Your Location'),
+          () => initMap(fallbackLat, fallbackLon, fallbackLocation),
+          { timeout: 10000 }
+        );
+      } else {
+        initMap(fallbackLat, fallbackLon, fallbackLocation);
+      }
+    }
+
+    function getHeatStatus(temp) {
+      if (temp >= 42) return { label: 'Extreme Danger', color: '#7F1D1D', bg: 'rgba(127,29,29,0.92)' };
+      if (temp >= 38) return { label: 'Danger', color: '#DC2626', bg: 'rgba(220,38,38,0.92)' };
+      if (temp >= 33) return { label: 'High Caution', color: '#EA580C', bg: 'rgba(234,88,12,0.92)' };
+      if (temp >= 28) return { label: 'Caution', color: '#CA8A04', bg: 'rgba(202,138,4,0.92)' };
+      return { label: 'Safe', color: '#16A34A', bg: 'rgba(22,163,74,0.92)' };
+    }
+
+    function calcWater(temp) {
+      if (temp >= 38) return '4.0L';
+      if (temp >= 33) return '3.2L';
+      if (temp >= 28) return '2.5L';
+      return '2.0L';
+    }
+
+    function calcSafeSun(temp) {
+      if (temp >= 42) return '10min';
+      if (temp >= 38) return '25min';
+      if (temp >= 33) return '45min';
+      return '90min';
+    }
+
+    async function fetchWeather(lat, lon) {
+      const cacheKey = `${lat.toFixed(4)},${lon.toFixed(4)}`;
+      if (weatherCache.has(cacheKey)) {
+        updateWeatherDisplay(weatherCache.get(cacheKey));
+        return;
+      }
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m&daily=temperature_2m_max&timezone=auto`;
+        const res = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeout);
+        const data = await res.json();
+
+        const current = data.current_weather || {};
+        const hourly = data.hourly || {};
+        const daily = data.daily || {};
+
+        let humidity = '--';
+        if (current.time && Array.isArray(hourly.time) && Array.isArray(hourly.relativehumidity_2m)) {
+          const targetHour = current.time.slice(0, 13) + ':00';
+          const idx = hourly.time.indexOf(targetHour);
+          humidity = idx >= 0 ? hourly.relativehumidity_2m[idx] : hourly.relativehumidity_2m[0] ?? '--';
+        }
+
+        const temp = Math.round(current.temperature ?? 0);
+        const peak = Math.round(daily.temperature_2m_max?.[0] ?? temp);
+        const weatherData = { temp, humidity, peak };
+        weatherCache.set(cacheKey, weatherData);
+        updateWeatherDisplay(weatherData);
+      } catch (e) {
+        const fallbackTemp = 34;
+        const status = getHeatStatus(fallbackTemp);
+        document.getElementById('currentTemp').textContent = fallbackTemp + '°C*';
+        document.getElementById('currentTemp').style.color = status.color;
+        document.getElementById('heatStatus').textContent = status.label;
+        document.getElementById('humidity').textContent = '72%';
+        document.getElementById('badgeTemp').textContent = fallbackTemp + '°C';
+        document.getElementById('badgeLabel').textContent = status.label;
+        document.getElementById('heatBadge').style.background = status.bg;
+        document.getElementById('peakTemp').textContent = '37°C';
+        document.getElementById('waterNeeded').textContent = calcWater(fallbackTemp);
+        document.getElementById('safeSun').textContent = calcSafeSun(fallbackTemp);
+        saveTempToStorage(fallbackTemp);
+      }
+    }
+
+    function saveTempToStorage(temp) {
+      try { localStorage.setItem('ineat_temp', String(temp)); } catch (e) {}
+    }
+
+    function updateWeatherDisplay({ temp, humidity, peak }) {
+      const status = getHeatStatus(temp);
+      document.getElementById('currentTemp').textContent = `${temp}°C`;
+      document.getElementById('currentTemp').style.color = status.color;
+      document.getElementById('heatStatus').textContent = status.label;
+      document.getElementById('humidity').textContent = `${humidity}%`;
+      document.getElementById('badgeTemp').textContent = `${temp}°C`;
+      document.getElementById('badgeLabel').textContent = status.label;
+      document.getElementById('heatBadge').style.background = status.bg;
+      document.getElementById('peakTemp').textContent = `${peak}°C`;
+      document.getElementById('waterNeeded').textContent = calcWater(temp);
+      document.getElementById('safeSun').textContent = calcSafeSun(temp);
+      saveTempToStorage(temp);
+    }
+
+    function initMap(lat, lon, cityName) {
+      document.getElementById('locationLabel').textContent = cityName || 'Your Location';
+      userPosition = L.latLng(lat, lon);
+      map = L.map('map', {
+        zoomControl: true,
+        scrollWheelZoom: true,
+        doubleClickZoom: true,
+        dragging: true,
+        touchZoom: true,
+        preferCanvas: true
+      }).setView(userPosition, 14);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      const userIcon = L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#DC2626" stroke="white" stroke-width="1.2"/>
+          <circle cx="12" cy="9" r="3" fill="white"/>
+        </svg>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [0, -36],
+        className: ''
+      });
+
+      userMarker = L.marker(userPosition, { icon: userIcon }).addTo(map)
+        .bindPopup('<strong style="font-family:Poppins;">You are here</strong>').openPopup();
+
+      coolZoneLayer = L.layerGroup().addTo(map);
+      moveLocationButton = createReturnToMeControl();
+      moveLocationButton.addTo(map);
+      updateReturnButtonVisibility();
+
+      map.on('moveend', () => {
+        const center = map.getCenter();
+        fetchCoolZones(center.lat, center.lng);
+        updateReturnButtonVisibility();
+      });
+
+      Promise.all([fetchWeather(lat, lon), fetchCoolZones(lat, lon)]);
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function getCoolZoneType(tags = {}) {
+      if (tags.amenity === 'cafe') return 'Cafe';
+      if (tags.amenity === 'restaurant') return 'Restaurant';
+      if (tags.amenity === 'fast_food') return 'Fast Food';
+      if (tags.shop === 'mall') return 'Mall';
+      if (tags.shop === 'convenience') return 'Convenience Store';
+      return 'Cool Zone';
+    }
+
+    function getElementLatLng(el) {
+      const lat = el.lat ?? el.center?.lat;
+      const lon = el.lon ?? el.center?.lon;
+      if (typeof lat !== 'number' || typeof lon !== 'number') return null;
+      return L.latLng(lat, lon);
+    }
+
+    async function fetchCoolZones(lat, lon) {
+      const coolIcon = L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#38BDF8" stroke="white" stroke-width="1.2"/>
+          <circle cx="12" cy="9" r="3" fill="white"/>
+        </svg>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30],
+        className: ''
+      });
+
+      coolZoneLayer.clearLayers();
+      if (nearestMarker) { nearestMarker.remove(); nearestMarker = null; }
+
+      document.getElementById('coolCount').textContent = 'Searching...';
+      document.getElementById('coolLabel').textContent = 'Finding nearest cafe, restaurant, mall, or convenience store';
+
+      try {
+        const query = `
+          [out:json][timeout:20];
+          (
+            node["amenity"~"^(cafe|restaurant|fast_food)$"](around:3000,${lat},${lon});
+            way["amenity"~"^(cafe|restaurant|fast_food)$"](around:3000,${lat},${lon});
+            relation["amenity"~"^(cafe|restaurant|fast_food)$"](around:3000,${lat},${lon});
+            node["shop"~"^(convenience|mall)$"](around:3000,${lat},${lon});
+            way["shop"~"^(convenience|mall)$"](around:3000,${lat},${lon});
+            relation["shop"~"^(convenience|mall)$"](around:3000,${lat},${lon});
+          );
+          out center tags 80;
+        `;
+
+        const res = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'data=' + encodeURIComponent(query)
+        });
+
+        if (!res.ok) throw new Error('Overpass request failed');
+
+        const data = await res.json();
+        const elements = (Array.isArray(data.elements) ? data.elements : [])
+          .map(el => ({ ...el, point: getElementLatLng(el) }))
+          .filter(el => el.point);
+
+        if (!elements.length) {
+          document.getElementById('coolCount').textContent = 'No cool zone found';
+          document.getElementById('coolLabel').textContent = 'Try moving the map or zooming out';
+          return;
+        }
+
+        const searchPoint = L.latLng(lat, lon);
+        const nearest = elements.reduce((best, el) => {
+          const dist = searchPoint.distanceTo(el.point);
+          if (!best || dist < best.dist) return { el, dist };
+          return best;
+        }, null);
+
+        elements.slice(0, 40).forEach(el => {
+          const tags = el.tags || {};
+          const type = getCoolZoneType(tags);
+          const name = tags.name || type;
+          const distance = Math.round(searchPoint.distanceTo(el.point));
+          const distanceText = distance >= 1000 ? `${(distance / 1000).toFixed(1)} km` : `${distance} m`;
+          L.marker(el.point, { icon: coolIcon }).addTo(coolZoneLayer)
+            .bindPopup(`<div style="font-family:Poppins,sans-serif; font-size:13px;"><strong>${escapeHTML(name)}</strong><br>${escapeHTML(type)} • ${escapeHTML(distanceText)}</div>`);
+        });
+
+        if (nearest) {
+          const tags = nearest.el.tags || {};
+          const type = getCoolZoneType(tags);
+          const nearestName = tags.name || type;
+          const distText = nearest.dist >= 1000 ? `${(nearest.dist / 1000).toFixed(1)} km` : `${Math.round(nearest.dist)} m`;
+          const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${nearest.el.point.lat},${nearest.el.point.lng}`;
+
+          document.getElementById('coolCount').textContent = nearestName;
+          document.getElementById('coolLabel').innerHTML = `${type} • ${distText}<br><a href="${directionsUrl}" target="_blank" rel="noopener">Get Directions</a>`;
+
+          nearestMarker = L.circleMarker(nearest.el.point, {
+            radius: 13, color: '#10B981', weight: 4, fillColor: '#A7F3D0', fillOpacity: 0.7
+          }).addTo(coolZoneLayer).bindPopup(`
+            <div style="font-family:Poppins,sans-serif; font-size:13px;">
+              <strong>Nearest Cool Zone</strong><br>
+              ${escapeHTML(nearestName)}<br>${escapeHTML(type)} • ${escapeHTML(distText)}<br>
+              <a href="${directionsUrl}" target="_blank" rel="noopener">Open directions</a>
+            </div>
+          `).openPopup();
+        }
+      } catch (e) {
+        document.getElementById('coolCount').textContent = 'Unable to load';
+        document.getElementById('coolLabel').textContent = 'The online map service may be busy. Try again later.';
+      }
+    }
+
+    function createReturnToMeControl() {
+      const control = L.Control.extend({
+        onAdd: () => {
+          const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+          container.style.cssText = 'background:white;padding:6px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;display:none;';
+          container.title = 'Return to your location';
+          container.innerHTML = '📍 My Location';
+          container.onclick = () => {
+            if (userPosition) { map.panTo(userPosition); updateReturnButtonVisibility(); }
+          };
+          moveLocationButton = container;
+          return container;
+        }
+      });
+      return new control({ position: 'topright' });
+    }
+
+    function updateReturnButtonVisibility() {
+      if (!moveLocationButton || !userPosition || !map) return;
+      const distance = map.getCenter().distanceTo(userPosition);
+      moveLocationButton.style.display = distance > 200 ? 'block' : 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+
+</body>
+</html>

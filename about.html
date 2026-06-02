@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I-neat | About</title>
+
+  <!-- Google Font (Poppins for better visual impact) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      color: #0A0A0A;
+    }
+
+    /* HEADER */
+    header.nav {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid #F3F4F6;
+      padding: 16px 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #11D3E8 0%, #1589FF 55%, #155DFC 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 22px rgba(21, 93, 252, 0.25);
+      flex-shrink: 0;
+    }
+
+    .app-logo svg {
+      width: 34px;
+      height: 34px;
+      display: block;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      margin: 0;
+      font-weight: 800;
+      color: #0A0A0A;
+    }
+
+    .brand p {
+      font-size: 12px;
+      margin: 0;
+      color: #6A7282;
+    }
+
+    nav.menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav.menu a,
+    .menu-features {
+      margin: 0 12px;
+      font-size: 15px;
+      color: #4A5565;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.3s;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-features {
+      margin: 0 12px;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active,
+    .menu-features:hover {
+      color: #2B7FFF;
+    }
+
+    .desktop-features-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 0.5px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      padding: 8px 0;
+      width: 200px;
+      z-index: 9999;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .desktop-features-menu.open { display: block; }
+
+    .desktop-features-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      color: #4A5565;
+      font-size: 14px;
+      margin: 0;
+      transition: 0.2s ease;
+      border-radius: 0;
+      background: none;
+    }
+
+    .desktop-features-menu a:hover {
+      background: #F0FDFF;
+      color: #00B8DB;
+    }
+
+    .menu-features .chevron-down {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .menu-features.active .chevron-down {
+      transform: rotate(180deg);
+    }
+
+    /* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.sub-item:hover { color: #00B8DB; }
+
+.chevron {
+  transition: transform 0.2s;
+  font-size: 13px;
+}
+.chevron.rotated { transform: rotate(180deg); }
+    
+    main {
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #00B8DB, #155DFC);
+      color: #fff;
+      text-align: center;
+      padding: 90px 40px;
+      border-radius: 28px;
+      margin: 40px auto;
+      max-width: 1088px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+
+    }
+
+    .hero-heart {
+       width: clamp(30px, 5vw, 80px);
+  height: clamp(30px, 5vw, 80px);
+  stroke: #ffffff;   
+  fill: #34a4ff;     
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.hero p{
+  font-size: 1.5em;
+  font-weight: 100;
+}
+.hero-heart:hover {
+  stroke: #c0f3fc;  
+  fill: #c8d6e6;     
+}
+
+
+    
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1088px;
+      margin: 40px auto;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+
+    .icon-problem {
+      width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #DBEAFE;   
+  border-radius: 16px;
+    }
+    
+    .icon-solution {
+      width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #DBEAFE;  
+  border-radius: 16px;
+    }
+    .card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #0A0A0A;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #4A5565;
+      line-height: 26px;
+    }
+
+    
+    .who-we-help {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      max-width: 1088px;
+      margin: 60px auto;
+      padding: 40px;
+    }
+
+    .who-we-help h3 {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .audiences {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .audience {
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .audience span {
+      font-size: 38px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .audience h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 6px 0;
+    }
+
+    .audience p {
+      font-size: 13px;
+      color: #4A5565;
+    }
+
+
+    .sdg {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 1088px;
+      margin: 40px auto;
+    }
+
+    .sdg-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 34px 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .sdg-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+    }
+
+    .sdg-icon-wrap {
+      width: 104px;
+      height: 104px;
+      background: #DBEAFE;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .sdg-icon {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sdg-card h4 {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: #0A0A0A;
+    }
+
+    .sdg-card p {
+      font-size: 14px;
+      color: #4A5565;
+      line-height: 24px;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .cards,
+      .sdg,
+      .audiences {
+        grid-template-columns: 1fr;
+      }
+
+      header.nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav.menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+
+  
+    .why-matters {
+      background: linear-gradient(90deg, #00B8DB, #2B7FFF);
+      color: #fff;
+      border-radius: 24px;
+      max-width: 1088px;
+      margin: 60px auto;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .why-matters h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .why-matters p {
+      font-size: 18px;
+      line-height: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+ 
+    footer {
+      background: #F9FAFB;
+      border-top: 1px solid #F3F4F6;
+      padding: 40px 20px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-container .app-logo {
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
+      margin-bottom: 12px;
+    }
+
+    .footer-container .app-logo svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .footer-text h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .footer-text p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #6A7282;
+    }
+
+  
+
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+/* Extra lock to prevent forced dark mode layout/color issues */
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="nav">
+
+  <div class="brand-group">
+    <div class="app-logo" aria-label="I-neat logo">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <circle cx="32" cy="32" r="12" fill="none" stroke="#ffffff" stroke-width="7"/>
+        <line x1="32" y1="5" x2="32" y2="14" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="32" y1="50" x2="32" y2="59" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="5" y1="32" x2="14" y2="32" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="50" y1="32" x2="59" y2="32" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="13" y1="13" x2="19" y2="19" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="45" y1="45" x2="51" y2="51" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="51" y1="13" x2="45" y2="19" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="19" y1="45" x2="13" y2="51" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="brand">
+      <h1>I-neat</h1>
+      <p>Stay Cool, Stay Safe</p>
+    </div>
+  </div>
+
+ <div style="display:flex; align-items:center; gap:10px;">
+  <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<div class="fly-menu" id="flyMenu">
+  <div class="menu-item" id="featuresToggle">
+    <span class="menu-label"><i class="fas fa-star"></i> Features</span>
+    <i class="fas fa-chevron-down chevron" id="chevron"></i>
+  </div>
+  <div class="features-sub" id="featuresSub">
+    <a class="sub-item" href="icebreaker.html"><i class="fas fa-snowflake"></i> Icebreaker</a>
+    <a class="sub-item" href="coolzones.html"><i class="fas fa-map-marker-alt"></i> Cool Zones</a>
+    <a class="sub-item" href="heatsync.html"><i class="fas fa-fire"></i> Heat-Sync</a>
+  </div>
+  <a class="menu-item" href="contact.html">
+    <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+  </a>
+</div>
+</header>
+ 
+<main>
+
+  <div class="hero">
+    <svg class="hero-heart" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20.8 4.6C19.1 2.9 16.4 2.9 14.7 4.6L12 7.3L9.3 4.6C7.6 2.9 4.9 2.9 3.2 4.6C1.5 6.3 1.5 9 3.2 10.7L12 19.5L20.8 10.7C22.5 9 22.5 6.3 20.8 4.6Z" />
+</svg>
+    <h2>Our Mission</h2>
+    <p>I-neat bridges the gap between "knowing it's hot" and "knowing how to survive it" by turning raw weather data into life-saving daily habits. Because in a world where 40°C is becoming the "new normal," staying cool isn't just about comfort—it's about public health resilience.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+
+      <div class="icon-problem">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#0092B8" stroke-width="2.3">
+    <rect x="4" y="4" width="20" height="20" />
+    <rect x="8" y="8" width="12" height="12" />
+    <rect x="11" y="11" width="6" height="6" />
+  </svg>
+</div>
+
+      <h3>The Problem</h3>
+      <p>While the sun is a constant, our tolerance isn't. We're tackling the silent escalation of heat-related health crises in urban areas. As the heat index hits "Danger" levels more frequently, people—especially students and commuters—are "toughing it out" until they collapse.</p>
+    </div>
+
+    <div class="card">
+     <div class="icon-solution">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#155DFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 3.1 1.9 5.7 4.5 6.7V17a2.5 2.5 0 0 0 5 0v-1.3c2.6-1 4.5-3.6 4.5-6.7a7 7 0 0 0-7-7z"/>
+  </svg>
+</div>
+ 
+      <h3>Our Solution</h3>
+      <p>I-neat isn't just a thermometer; it's a personal heat bodyguard. We provide predictive awareness, smart action plans, and community mapping to turn a lonely struggle into a shared effort to find the "coolest" spots in the city.</p>
+    </div>
+  </div>
+
+  <div class="who-we-help">
+    <h3>Who We Help</h3>
+    <div class="audiences">
+
+      <div class="audience">
+        <span>🚶</span>
+        <h4>Commuters</h4>
+        <p>Daily city travelers under extreme heat.</p>
+      </div>
+
+      <div class="audience">
+        <span>🎓</span>
+        <h4>Students</h4>
+        <p>Campus walkers exposed to heat stress.</p>
+      </div>
+
+      <div class="audience">
+        <span>🏃</span>
+        <h4>Athletes</h4>
+        <p>Outdoor training in hot conditions.</p>
+      </div>
+
+      <div class="audience">
+        <span>👴</span>
+        <h4>Elderly</h4>
+        <p>Most vulnerable to heat risks.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sdg">
+
+    <div class="sdg-card">
+      <div class="sdg-icon-wrap">
+        <img src="sdgicon1.png" class="sdg-icon" alt="SDG 3 Good Health and Well-Being">
+      </div>
+
+      <h4>SDG 3: Good Health and Well-Being</h4>
+      <p>
+        I-neat supports health and well-being by helping users avoid heatstroke,
+        dehydration, and heat exhaustion through alerts, reminders, and nearby cool zone guidance.
+      </p>
+    </div>
+
+    <div class="sdg-card">
+      <div class="sdg-icon-wrap">
+        <img src="sdgicon2.png" class="sdg-icon" alt="SDG 13 Climate Action">
+      </div>
+
+      <h4>SDG 13: Climate Action</h4>
+      <p>
+        I-neat promotes climate awareness by helping people respond to extreme heat,
+        adapt to rising temperatures, and make safer daily decisions during hot weather.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="why-matters">
+    <h3>Why This Matters</h3>
+    <p>Heatstroke has a high mortality rate, and dehydration kills productivity and mental clarity long before it kills the body. In a world where 40°C is becoming the "new normal," staying cool isn't just about comfort—it's about public health resilience.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="footer-container">
+
+    <div class="app-logo" aria-label="I-neat footer logo">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <circle cx="32" cy="32" r="12" fill="none" stroke="#ffffff" stroke-width="7"/>
+        <line x1="32" y1="5" x2="32" y2="14" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="32" y1="50" x2="32" y2="59" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="5" y1="32" x2="14" y2="32" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="50" y1="32" x2="59" y2="32" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="13" y1="13" x2="19" y2="19" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="45" y1="45" x2="51" y2="51" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="51" y1="13" x2="45" y2="19" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        <line x1="19" y1="45" x2="13" y2="51" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="footer-text">
+      <h2>I-neat</h2>
+      <p>Stay Cool, Stay Safe</p>
+      <p>Turning the heat into data you can act on</p>
+    </div>
+
+  </div>
+
+</footer>
+
+  <script>
+
+  const hamBtn = document.getElementById('hamBtn');
+  const flyMenu = document.getElementById('flyMenu');
+  const featToggle = document.getElementById('featuresToggle');
+  const featuresSub = document.getElementById('featuresSub');
+  const chevron = document.getElementById('chevron');
+
+    // Mobile Menu
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+      if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+        desktopFeaturesMenu.classList.remove('open');
+        desktopFeaturesToggle.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I-neat | Heat-Sync</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      color:#0A0A0A;
+    }
+
+    /* HEADER */
+    header.nav{
+      position: relative;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.85);
+      border-bottom:1px solid #F3F4F6;
+      padding:16px 24px;
+    }
+
+    .brand-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      margin-right:0;
+    }
+
+    .brand h1{
+      font-size:22px;
+      margin:0;
+      color:#0A0A0A;
+      font-weight:700;
+    }
+
+    .brand p{
+      font-size:12px;
+      color:#6A7282;
+      margin:3px 0 0 0;
+    }
+
+    nav.menu a{
+      margin:0 12px;
+      font-size:15px;
+      color:#4A5565;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:0.3s ease;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active{
+      color:#2B7FFF;
+    }
+
+    /* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  }
+  .sub-item:hover { color: #00B8DB; }
+
+  .chevron {
+    transition: transform 0.2s;
+    font-size: 13px;
+  }
+.chevron.rotated { transform: rotate(180deg); }
+
+    /* MAIN */
+    main{
+      padding:60px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .main-title{
+      font-size:42px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .main-sub{
+      color:#6A7282;
+      font-size:15px;
+      max-width:700px;
+      text-align:center;
+      line-height:1.7;
+      margin-bottom:45px;
+    }
+
+    /* TOP GRID */
+    .top-grid{
+      display:flex;
+      gap:24px;
+      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+      max-width:1100px;
+    }
+
+    /* LEFT CARD */
+    .heat-card{
+      background:white;
+      width:500px;
+      border-radius:24px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      padding:24px;
+    }
+
+    .card-header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .card-header i{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:#D9F7FF;
+      color:#06B6D4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+    }
+
+    .card-header h3{
+      font-size:20px;
+      margin-bottom:2px;
+    }
+
+    .card-header p{
+      font-size:12px;
+      color:#6A7282;
+    }
+
+    /* TEMP BOX */
+    .temp-box{
+      background:#F9FAFB;
+      border-radius:20px;
+      padding:28px;
+      text-align:center;
+      margin-bottom:28px;
+    }
+
+    .temp-box i{
+      color:#F97316;
+      font-size:18px;
+      margin-bottom:12px;
+    }
+
+    .temp-label{
+      font-size:13px;
+      color:#6A7282;
+      margin-bottom:10px;
+    }
+
+    .temp{
+      font-size:54px;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .heat-tag{
+      display:inline-block;
+      background:#FEF3C7;
+      color:#92400E;
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:600;
+    }
+
+    /* COLORS */
+    .section-title{
+      font-size:16px;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+
+    .section-sub{
+      font-size:13px;
+      color:#6A7282;
+      margin-bottom:18px;
+      line-height:1.6;
+    }
+
+    .colors-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .color-card{
+      border-radius:16px;
+      border:2px solid #E5E7EB;
+      overflow:hidden;
+      transition:0.3s ease;
+      cursor:pointer;
+      background:white;
+    }
+
+    .color-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0px 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .color-preview{
+      height:60px;
+      position:relative;
+    }
+
+    .recommended{
+      border-color:#22C55E;
+    }
+
+    .recommended .check{
+      display:flex;
+    }
+
+    .check{
+      position:absolute;
+      top:8px;
+      right:8px;
+      width:20px;
+      height:20px;
+      background:#22C55E;
+      border-radius:50%;
+      color:white;
+      font-size:10px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .color-name{
+      text-align:center;
+      padding:10px;
+      font-size:12px;
+      font-weight:500;
+    }
+
+    .white{ background:#FFFFFF; }
+    .lightblue{ background:#D9F7FF; }
+    .beige{ background:#F5F5DC; }
+    .yellow{ background:#FEF9C3; }
+    .lightgray{ background:#E5E7EB; }
+    .darkgray{ background:#6B7280; }
+    .navy{ background:#1E3A8A; }
+    .black{ background:#111827; }
+
+    /* ALERT BOXES */
+    .best-box,
+    .avoid-box{
+      border-radius:16px;
+      padding:14px 16px;
+      margin-top:12px;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .best-box{
+      background:#F0FDF4;
+      border:1px solid #BBF7D0;
+      color:#166534;
+    }
+
+    .avoid-box{
+      background:#FEF2F2;
+      border:1px solid #FECACA;
+      color:#B91C1C;
+    }
+
+    .weather-advice-box{
+      border-radius:16px;
+      padding:14px 16px;
+      margin-top:12px;
+      font-size:13px;
+      line-height:1.7;
+      background:#EFF6FF;
+      border:1px solid #BFDBFE;
+      color:#1E40AF;
+    }
+
+    .weather-status{
+      font-size:12px;
+      color:#6A7282;
+      margin-top:10px;
+      text-align:center;
+      line-height:1.5;
+    }
+
+    /* RIGHT SIDE */
+    .side-panel{
+      width:390px;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    /* WHY CARD */
+    .why-card{
+      background:white;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .why-header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .why-header i{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:#D9F7FF;
+      color:#06B6D4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .why-header h3{
+      font-size:18px;
+    }
+
+    .why-card p{
+      color:#6A7282;
+      font-size:13px;
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    .fact-row{
+      display:flex;
+      justify-content:space-between;
+      padding:12px 0;
+      border-bottom:1px solid #F3F4F6;
+      font-size:13px;
+    }
+
+    .good{
+      color:#22C55E;
+      font-weight:600;
+    }
+
+    .bad{
+      color:#EF4444;
+      font-weight:600;
+    }
+
+    /* TIPS */
+    .tips-card{
+      background:linear-gradient(135deg,#00B8DB,#155DFC);
+      color:white;
+      border-radius:24px;
+      padding:28px;
+      box-shadow:0px 10px 20px rgba(21,93,252,0.15);
+    }
+
+    .tips-card i{
+      font-size:30px;
+      margin-bottom:16px;
+    }
+
+    .tips-card h3{
+      margin-bottom:18px;
+      font-size:22px;
+    }
+
+    .tips-card ul{
+      list-style:none;
+    }
+
+    .tips-card li{
+      margin-bottom:12px;
+      font-size:14px;
+      line-height:1.6;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    /* RISK SECTION */
+    .risk-wrapper{
+      width:100%;
+      max-width:980px;
+      margin-top:45px;
+      background:white;
+      border-radius:26px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      padding:36px;
+    }
+
+    .risk-title{
+      text-align:center;
+      margin-bottom:28px;
+      font-size:28px;
+      font-weight:700;
+    }
+
+    .risk-item{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
+      margin-bottom:24px;
+    }
+
+    .risk-icon{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      flex-shrink:0;
+    }
+
+    .risk-item h4{
+      margin-bottom:6px;
+      font-size:17px;
+    }
+
+    .risk-item p{
+      font-size:14px;
+      color:#6A7282;
+      line-height:1.6;
+    }
+
+    .green{ background:#DCFCE7; }
+    .yellowbg{ background:#FEF3C7; }
+    .orangebg{ background:#FED7AA; }
+    .redbg{ background:#FECACA; }
+
+    /* FOOTER */
+    footer{
+      background:#F9FAFB;
+      border-top:1px solid #F3F4F6;
+      padding:40px 20px;
+      margin-top:70px;
+      text-align:center;
+    }
+
+    .footer-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .footer-logo{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+      margin-bottom:10px;
+    }
+
+    .footer-text h2{
+      font-size:24px;
+      margin-bottom:4px;
+    }
+
+    .footer-text p{
+      font-size:14px;
+      color:#6A7282;
+      margin-bottom:4px;
+    }
+
+    /* MOBILE */
+    @media(max-width:950px){
+
+      header.nav{
+        flex-direction:column;
+        gap:18px;
+      }
+
+      nav.menu{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .main-title{
+        font-size:34px;
+      }
+
+      .heat-card,
+      .side-panel{
+        width:100%;
+      }
+
+      .colors-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+    }
+
+  
+
+/* =========================================================
+   RESPONSIVE FIX: phone / tablet / desktop friendly layout
+   ========================================================= */
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a,
+.menu-features {
+  margin: 0 !important;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  font-size: 15px;
+  color: #4A5565;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.menu-features {
+  padding: 0;
+  border: none;
+  background: none;
+  margin: 0 !important;
+}
+
+nav.menu a:hover,
+nav.menu a.active,
+.menu-features:hover {
+  color: #2B7FFF;
+}
+
+.desktop-features-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 8px 0;
+  width: 200px;
+  z-index: 9999;
+  display: none;
+  margin-top: 12px;
+}
+
+.desktop-features-menu.open { display: block; }
+
+.desktop-features-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #4A5565;
+  font-size: 14px;
+  margin: 0;
+  transition: 0.2s ease;
+  border-radius: 0;
+  background: none;
+  white-space: normal;
+}
+
+.desktop-features-menu a:hover {
+  background: #F0FDFF;
+  color: #00B8DB;
+}
+
+.menu-features .chevron-down {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.menu-features.active .chevron-down {
+  transform: rotate(180deg);
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+/* Extra lock to prevent forced dark mode layout/color issues */
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="nav">
+  <div class="brand-group">
+    <img src="i-neat_logo.png" class="logo" alt="I-neat logo">
+    <div class="brand">
+      <h1>I-neat</h1>
+      <p>Stay Cool, Stay Safe</p>
+    </div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:10px;">
+  <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+  <div class="fly-menu" id="flyMenu">
+    <div class="menu-item" id="featuresToggle">
+      <span class="menu-label"><i class="fas fa-star"></i> Features</span>
+      <i class="fas fa-chevron-down chevron" id="chevron"></i>
+    </div>
+    <div class="features-sub" id="featuresSub">
+      <a class="sub-item" href="icebreaker.html"><i class="fas fa-snowflake"></i> Icebreaker</a>
+      <a class="sub-item" href="coolzones.html"><i class="fas fa-map-marker-alt"></i> Cool Zones</a>
+      <a class="sub-item" href="heatsync.html"><i class="fas fa-fire"></i> Heat-Sync</a>
+    </div>
+    <a class="menu-item" href="about.html">
+      <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+    </a>
+    <a class="menu-item" href="contact.html">
+      <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+    </a>
+  </div>
+</header>
+
+
+  <!-- MAIN -->
+  <main>
+
+    <h1 class="main-title">Heat-Sync Clothes</h1>
+
+    <p class="main-sub">
+      Get real-time outfit recommendations based on live weather.
+      No default cycling temperature — it changes using your current location.
+    </p>
+
+    <!-- TOP GRID -->
+    <section class="top-grid">
+
+      <!-- LEFT -->
+      <div class="heat-card">
+
+        <div class="card-header">
+
+          <i class="fas fa-shirt"></i>
+
+          <div>
+            <h3>Heat-Sync Clothes</h3>
+            <p>What to wear today</p>
+          </div>
+
+        </div>
+
+        <!-- TEMP -->
+        <div class="temp-box">
+
+          <i class="fas fa-temperature-high"></i>
+
+          <div class="temp-label" id="weatherCondition">
+            Waiting for live weather...
+          </div>
+
+          <div class="temp" id="temperature">
+            --°C
+          </div>
+
+          <div class="heat-tag" id="heatTag">
+            Live Weather Required
+          </div>
+
+          <div class="weather-status" id="weatherStatus">
+            Allow location access to get real-time outfit advice.
+          </div>
+
+        </div>
+
+        <!-- COLORS -->
+        <h3 class="section-title">
+          Real-Time Weather Outfit Colors
+        </h3>
+
+        <p class="section-sub" id="colorExplanation">
+          Waiting for live weather data before recommending colors.
+        </p>
+
+        <div class="colors-grid">
+
+          <div class="color-card recommended">
+            <div class="color-preview white">
+              <div class="check">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+            <div class="color-name">White</div>
+          </div>
+
+          <div class="color-card recommended">
+            <div class="color-preview lightblue">
+              <div class="check">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+            <div class="color-name">Light Blue</div>
+          </div>
+
+          <div class="color-card recommended">
+            <div class="color-preview beige">
+              <div class="check">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+            <div class="color-name">Beige</div>
+          </div>
+
+          <div class="color-card recommended">
+            <div class="color-preview yellow">
+              <div class="check">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+            <div class="color-name">Light Yellow</div>
+          </div>
+
+          <div class="color-card">
+            <div class="color-preview lightgray"></div>
+            <div class="color-name">Light Gray</div>
+          </div>
+
+          <div class="color-card">
+            <div class="color-preview darkgray"></div>
+            <div class="color-name">Dark Gray</div>
+          </div>
+
+          <div class="color-card">
+            <div class="color-preview navy"></div>
+            <div class="color-name">Navy Blue</div>
+          </div>
+
+          <div class="color-card">
+            <div class="color-preview black"></div>
+            <div class="color-name">Black</div>
+          </div>
+
+        </div>
+
+        <!-- BOXES -->
+        <div class="best-box" id="bestBox">
+          ✓ Best Choice Today <br>
+          Waiting for live weather data...
+        </div>
+
+        <div class="avoid-box" id="avoidBox">
+          ✕ Avoid Wearing <br>
+          Waiting for live weather data...
+        </div>
+
+        <div class="weather-advice-box" id="wearAdvice">
+          ✓ Weather Tip <br>
+          No default tip shown. This will update after live weather loads.
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="side-panel">
+
+        <!-- WHY -->
+        <div class="why-card">
+
+          <div class="why-header">
+            <i class="fas fa-circle-info"></i>
+            <h3>Why Outfit Matters</h3>
+          </div>
+
+          <p>
+            Dark clothing absorbs more heat from the sun,
+            while light colors reflect it. The fabric and
+            coverage also affect how your body regulates temperature.
+          </p>
+
+          <div class="fact-row">
+            <span>White/Light Colors</span>
+            <span class="good">Best Choice</span>
+          </div>
+
+          <div class="fact-row">
+            <span>Breathable Fabrics</span>
+            <span class="good">Recommended</span>
+          </div>
+
+          <div class="fact-row">
+            <span>Dark Colors</span>
+            <span class="bad">Risky</span>
+          </div>
+
+          <div class="fact-row">
+            <span>Heavy Layers</span>
+            <span class="bad">Avoid</span>
+          </div>
+
+        </div>
+
+        <!-- TIPS -->
+        <div class="tips-card">
+
+          <i class="fas fa-shirt"></i>
+
+          <h3>Pro Tips</h3>
+
+          <ul>
+
+            <li>
+              <i class="fas fa-check"></i>
+For heat: wear loose, light-colored clothing
+            </li>
+
+            <li>
+              <i class="fas fa-check"></i>
+For humidity: choose cotton or moisture-wicking fabrics
+            </li>
+
+            <li>
+              <i class="fas fa-check"></i>
+For strong sun: use a cap or umbrella
+            </li>
+
+            <li>
+              <i class="fas fa-check"></i>
+For rain: bring an umbrella/raincoat and wear non-slip shoes
+            </li>
+
+            <li>
+              <i class="fas fa-check"></i>
+For long outdoor trips: bring water and extra clothes
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RISK -->
+    <section class="risk-wrapper">
+
+      <h2 class="risk-title">
+        Heat Risk Levels Explained
+      </h2>
+
+      <div class="risk-item">
+
+        <div class="risk-icon green"></div>
+
+        <div>
+          <h4>Low Risk (Below 35°C)</h4>
+
+          <p>
+            Safe for outdoor activities.
+            Stay hydrated and take breaks in shade.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="risk-item">
+
+        <div class="risk-icon yellowbg"></div>
+
+        <div>
+          <h4>Moderate Risk (35-40°C)</h4>
+
+          <p>
+            Limit prolonged outdoor exposure.
+            Drink water every 15-20 minutes.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="risk-item">
+
+        <div class="risk-icon orangebg"></div>
+
+        <div>
+          <h4>High Risk (40-45°C)</h4>
+
+          <p>
+            Avoid outdoor activities during peak hours.
+            Seek air-conditioned spaces.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="risk-item">
+
+        <div class="risk-icon redbg"></div>
+
+        <div>
+          <h4>Extreme Risk (Above 45°C)</h4>
+
+          <p>
+            Heat emergency. Stay indoors with AC.
+            Only go outside if absolutely necessary.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-container">
+
+      <img src="i-neat_logo.png" class="footer-logo">
+
+      <div class="footer-text">
+        <h2>I-neat</h2>
+        <p>Stay Cool, Stay Safe</p>
+        <p>Turning the heat into data you can act on</p>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const hamBtn = document.getElementById('hamBtn');
+    const flyMenu = document.getElementById('flyMenu');
+    const featToggle = document.getElementById('featuresToggle');
+    const featuresSub = document.getElementById('featuresSub');
+    const chevron = document.getElementById('chevron');
+
+    // Mobile Menu
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+      if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+        desktopFeaturesMenu.classList.remove('open');
+        desktopFeaturesToggle.classList.remove('active');
+      }
+    });
+
+    const colorCards = document.querySelectorAll('.color-card');
+    const tempText = document.getElementById('temperature');
+    const heatTag = document.getElementById('heatTag');
+    const weatherCondition = document.getElementById('weatherCondition');
+    const weatherStatus = document.getElementById('weatherStatus');
+    const colorExplanation = document.getElementById('colorExplanation');
+    const bestBox = document.getElementById('bestBox');
+    const avoidBox = document.getElementById('avoidBox');
+    const wearAdvice = document.getElementById('wearAdvice');
+
+    let lastCoords = null;
+    let refreshTimer = null;
+
+    colorCards.forEach(card => {
+      card.addEventListener('click', () => {
+        colorCards.forEach(c => c.style.transform = 'scale(1)');
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.style.transform = 'translateY(-4px)';
+        }, 150);
+      });
+    });
+
+    const WEATHER_CODES = {
+      0: 'Clear sky',
+      1: 'Mainly clear',
+      2: 'Partly cloudy',
+      3: 'Cloudy',
+      45: 'Foggy',
+      48: 'Foggy',
+      51: 'Light drizzle',
+      53: 'Drizzle',
+      55: 'Heavy drizzle',
+      61: 'Light rain',
+      63: 'Rain',
+      65: 'Heavy rain',
+      80: 'Rain showers',
+      81: 'Rain showers',
+      82: 'Heavy rain showers',
+      95: 'Thunderstorm',
+      96: 'Thunderstorm',
+      99: 'Thunderstorm'
+    };
+
+    function showLiveRequired(message) {
+      tempText.textContent = '--°C';
+      heatTag.textContent = 'Live Weather Required';
+      weatherCondition.textContent = 'Live weather unavailable';
+      weatherStatus.textContent = message;
+      colorExplanation.textContent = 'No default outfit recommendation is shown because live weather data is required.';
+      bestBox.innerHTML = '✓ Best Choice Today <br> Waiting for live weather data...';
+      avoidBox.innerHTML = '✕ Avoid Wearing <br> Waiting for live weather data...';
+      wearAdvice.innerHTML = '✓ Weather Tip <br> Please allow location access and stay connected to the internet.';
+      colorCards.forEach(card => card.classList.remove('recommended'));
+    }
+
+    function isRainy(weatherCode, rainChance) {
+      return [51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(weatherCode) || rainChance >= 50;
+    }
+
+    function getHeatTag(temp, rainy, rainChance) {
+      if (rainy) return rainChance >= 70 ? 'Rainy Weather' : 'Possible Rain';
+      if (temp >= 42) return 'Extreme Heat';
+      if (temp >= 38) return 'High Heat';
+      if (temp >= 33) return 'Warm / Humid';
+      if (temp >= 28) return 'Moderate Heat';
+      return 'Cool / Mild';
+    }
+
+    function getOutfitPlan(temp, humidity, weatherCode, rainChance) {
+      const rainy = isRainy(weatherCode, rainChance);
+      const humid = humidity >= 75;
+
+      if (rainy) {
+        return {
+          colors: ['Navy Blue', 'Dark Gray', 'Light Gray'],
+          avoid: ['White pants', 'long dragging clothes', 'slippery sandals'],
+          explain: 'Live rain condition detected. Choose clothes that are safer and easier to manage on wet roads.',
+          advice: `✓ Rain Outfit Tip <br>
+          Bring an umbrella or raincoat. Wear non-slip shoes, avoid white pants, and protect your phone and bag. Rain chance: ${rainChance}%.`
+        };
+      }
+
+      if (temp >= 38) {
+        return {
+          colors: ['White', 'Light Blue', 'Beige', 'Light Yellow'],
+          avoid: ['Black', 'Navy Blue', 'Dark Gray', 'thick hoodie'],
+          explain: 'Live high heat detected. Light colors reflect sunlight better and breathable fabrics help reduce heat stress.',
+          advice: '✓ Hot Weather Outfit Tip <br> Wear loose white, light blue, beige, or light yellow clothes. Use cotton/dri-fit fabric, bring water, and use a cap or umbrella.'
+        };
+      }
+
+      if (temp >= 33 || humid) {
+        return {
+          colors: ['White', 'Light Blue', 'Beige'],
+          avoid: ['Black', 'tight clothes', 'heavy fabric'],
+          explain: 'Live warm or humid condition detected. Choose breathable clothes that help sweat evaporate.',
+          advice: '✓ Humid Weather Outfit Tip <br> Wear loose cotton or moisture-wicking clothes. Bring a small towel, drink water often, and take shade breaks.'
+        };
+      }
+
+      return {
+        colors: ['Light Gray', 'Beige', 'Light Blue'],
+        avoid: ['heavy layers', 'thick jacket', 'non-breathable fabric'],
+        explain: 'Live weather is mild. Comfortable light clothing is enough for normal outdoor movement.',
+        advice: '✓ Cool/Mild Weather Outfit Tip <br> Wear comfortable light clothes. Bring a light jacket only if you will stay in a cold indoor place.'
+      };
+    }
+
+    function updateColorCards(recommendedColors) {
+      colorCards.forEach(card => {
+        const name = card.querySelector('.color-name')?.textContent?.trim();
+        if (recommendedColors.includes(name)) {
+          card.classList.add('recommended');
+        } else {
+          card.classList.remove('recommended');
+        }
+      });
+    }
+
+    function updatePageFromLiveWeather({ temp, humidity, weatherCode, rainChance, observedTime }) {
+      const condition = WEATHER_CODES[weatherCode] || 'Current weather';
+      const rainy = isRainy(weatherCode, rainChance);
+      const outfit = getOutfitPlan(temp, humidity, weatherCode, rainChance);
+
+      tempText.textContent = `${temp}°C`;
+      heatTag.textContent = getHeatTag(temp, rainy, rainChance);
+      weatherCondition.textContent = `${condition} • Humidity ${humidity}%`;
+      weatherStatus.textContent = `Live data updated: ${observedTime}. Rain chance: ${rainChance}%.`;
+      colorExplanation.textContent = outfit.explain;
+
+      updateColorCards(outfit.colors);
+      bestBox.innerHTML = `✓ Best Choice Today <br> ${outfit.colors.join(', ')}`;
+      avoidBox.innerHTML = `✕ Avoid Wearing <br> ${outfit.avoid.join(', ')}`;
+      wearAdvice.innerHTML = outfit.advice;
+
+      try {
+        localStorage.setItem('ineat_temp', String(temp));
+      } catch (error) {
+        console.warn('Unable to save live temp:', error);
+      }
+    }
+
+    async function fetchLiveWeather(lat, lon) {
+      weatherStatus.textContent = 'Fetching real-time weather from online weather service...';
+
+      const url =
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+        `&current_weather=true&hourly=relativehumidity_2m,precipitation_probability` +
+        `&timezone=auto&forecast_days=1`;
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Weather API error: ' + response.status);
+      }
+
+      const data = await response.json();
+      const current = data.current_weather;
+
+      if (!current || typeof current.temperature !== 'number') {
+        throw new Error('No current weather data returned');
+      }
+
+      const hourly = data.hourly || {};
+      const temp = Math.round(current.temperature);
+      const weatherCode = Number(current.weathercode ?? 0);
+
+      let humidity = '--';
+      let rainChance = 0;
+
+      if (current.time && Array.isArray(hourly.time)) {
+        const currentHour = current.time.slice(0, 13) + ':00';
+        const index = hourly.time.indexOf(currentHour);
+        const safeIndex = index >= 0 ? index : 0;
+
+        humidity = Math.round(hourly.relativehumidity_2m?.[safeIndex] ?? 0);
+        rainChance = Math.round(hourly.precipitation_probability?.[safeIndex] ?? 0);
+      }
+
+      updatePageFromLiveWeather({
+        temp,
+        humidity,
+        weatherCode,
+        rainChance,
+        observedTime: current.time || 'now'
+      });
+    }
+
+    function startAutoRefresh() {
+      if (refreshTimer) clearInterval(refreshTimer);
+
+      refreshTimer = setInterval(() => {
+        if (lastCoords) {
+          fetchLiveWeather(lastCoords.lat, lastCoords.lon).catch(error => {
+            console.warn('Live weather refresh failed:', error);
+            weatherStatus.textContent = 'Live weather refresh failed. Please check internet connection and reload.';
+          });
+        }
+      }, 10 * 60 * 1000); // refresh every 10 minutes
+    }
+
+    function initRealTimeWeather() {
+      if (!navigator.geolocation) {
+        showLiveRequired('This browser does not support live location. Real-time outfit advice cannot load.');
+        return;
+      }
+
+      weatherStatus.textContent = 'Requesting your live location...';
+
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          lastCoords = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          };
+
+          fetchLiveWeather(lastCoords.lat, lastCoords.lon)
+            .then(startAutoRefresh)
+            .catch(error => {
+              console.warn('Live weather failed:', error);
+              showLiveRequired('Live weather could not load. Check internet connection or weather API access.');
+            });
+        },
+        error => {
+          console.warn('Location permission/error:', error);
+          showLiveRequired('Location permission is required. Please allow location access to get real-time weather advice.');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    }
+
+    initRealTimeWeather();
+  </script>
+
+</body>
+</html>

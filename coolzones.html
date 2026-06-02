@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I-neat | Cool Zones</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Leaflet Map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+}
+
+header.nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #F3F4F6;
+  padding: 16px 24px;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-right: 0;
+}
+
+.brand h1 {
+  font-size: 22px;
+  margin: 0;
+  color: #0A0A0A;
+  font-weight: 700;
+}
+
+.brand p {
+  font-size: 12px;
+  color: #6A7282;
+  margin: 3px 0 0 0;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+nav.menu a,
+.menu-features {
+  margin: 0 12px;
+  font-size: 16px;
+  color: #4A5565;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-features {
+  margin: 0 12px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+nav.menu a:hover,
+nav.menu a.active,
+.menu-features:hover {
+  color: #2B7FFF;
+}
+
+.desktop-features-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 8px 0;
+  width: 200px;
+  z-index: 9999;
+  display: none;
+  margin-top: 12px;
+}
+
+.desktop-features-menu.open { display: block; }
+
+.desktop-features-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #4A5565;
+  font-size: 14px;
+  margin: 0;
+  transition: 0.2s ease;
+  border-radius: 0;
+  background: none;
+}
+
+.desktop-features-menu a:hover {
+  background: #F0FDFF;
+  color: #00B8DB;
+}
+
+.menu-features .chevron-down {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.menu-features.active .chevron-down {
+  transform: rotate(180deg);
+}
+
+
+/* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.sub-item:hover { color: #00B8DB; }
+
+.chevron {
+  transition: transform 0.2s;
+  font-size: 13px;
+}
+.chevron.rotated { transform: rotate(180deg); }
+
+
+.coolzones {
+  padding: 40px;
+  text-align: center;
+}
+
+.coolzones h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0A0A0A;
+  margin-bottom: 10px;
+}
+
+.coolzones p {
+  font-size: 18px;
+  color: #4A5565;
+  margin-bottom: 30px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 200px;
+}
+
+.card h3 {
+  font-size: 32px;
+  margin: 0;
+  color: #0A0A0A;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 14px;
+  color: #4A5565;
+}
+
+.map {
+  width: 85%;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+}
+
+.search-panel {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.search-panel h3 {
+  margin: 0 0 8px;
+  color: #0A0A0A;
+}
+
+.search-panel p {
+  margin: 0 0 14px;
+  color: #6A7282;
+  font-size: 14px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1;
+  min-width: 240px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #D1D5DB;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  padding: 14px 18px;
+  background: #00B8DB;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+.search-btn:hover,
+.location-btn:hover,
+.add-btn:hover {
+  background: #2B7FFF;
+}
+
+.location-btn {
+  background: #155DFC;
+}
+
+#locationStatus {
+  margin-top: 12px;
+  color: #4A5565;
+  font-size: 14px;
+}
+
+.map-box {
+  height: 430px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #E5E7EB;
+}
+
+#coolZoneMap {
+  width: 100%;
+  height: 100%;
+}
+
+.list {
+  margin-top: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: #F9FAFB;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.item small {
+  color: #6A7282;
+}
+
+.rating a {
+  color: #155DFC;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.form-container {
+  display: none;
+  margin-top: 20px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #D1D5DB;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.info {
+  width: 85%;
+  margin: 40px auto;
+  background: #ECFEFF;
+  border: 1px solid #A2F4FD;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.info h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.info-box {
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #F9FAFB;
+  margin-top: 40px;
+  border-top: 1px solid #F3F4F6;
+}
+
+.footer-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin: auto;
+}
+
+footer h3 {
+  margin-top: 10px;
+}
+
+footer p {
+  color: #6A7282;
+  font-size: 13px;
+}
+
+@media(max-width: 850px) {
+  header.nav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  nav.menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav.menu a {
+    margin: 0;
+  }
+
+  .coolzones h2 {
+    font-size: 32px;
+  }
+
+  .map,
+  .info {
+    width: 90%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE FIX: phone / tablet / desktop friendly layout
+   ========================================================= */
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+/* Extra lock to prevent forced dark mode layout/color issues */
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+<header class="nav">
+  <div class="brand-group">
+    <img src="i-neat_logo.png" class="logo" alt="logo">
+    <div class="brand">
+      <h1>I-neat</h1>
+      <p>Stay Cool, Stay Safe</p>
+    </div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:10px;">
+  <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+<div class="fly-menu" id="flyMenu">
+
+  <div class="menu-item" id="featuresToggle">
+    <span class="menu-label"><i class="fas fa-star"></i> Features</span>
+    <i class="fas fa-chevron-down chevron" id="chevron"></i>
+  </div>
+  <div class="features-sub" id="featuresSub">
+    <a class="sub-item" href="icebreaker.html"><i class="fas fa-snowflake"></i> Icebreaker</a>
+    <a class="sub-item" href="heatsync.html"><i class="fas fa-fire"></i> Heat-Sync</a>
+  </div>
+  <a class="menu-item" href="about.html">
+    <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+  </a>
+  <a class="menu-item" href="contact.html">
+    <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+  </a>
+</div>
+</header>
+
+<main class="coolzones">
+  <h2>Find Your Nearest Cool Zone</h2>
+  <p>Find nearby restaurants, cafés, malls, convenience stores, supermarkets, fast food chains, and libraries based on your searched place or live location.</p>
+
+  <div class="stats">
+    <div class="card">
+      <h3 id="mappedCount">0</h3>
+      <p>Nearby Cool Zones Found</p>
+    </div>
+    <div class="card">
+      <h3>3 km</h3>
+      <p>Search Radius</p>
+    </div>
+    <div class="card">
+      <h3>PH</h3>
+      <p>Works Anywhere</p>
+    </div>
+  </div>
+</main>
+
+<div class="map">
+  <div class="search-panel">
+    <h3><i class="fas fa-search-location"></i> Search Cool Zone Location</h3>
+    <p>Search your location to find nearby air-conditioned places like cafés, convenience stores, fast food chains, malls, supermarkets, and libraries.</p>
+
+    <div class="search-row">
+      <input type="text" id="placeSearch" placeholder="Example: Tagaytay, Cebu IT Park, SM Manila, Baguio Session Road">
+      <button class="search-btn" onclick="searchCoolZonesByPlace()">
+        <i class="fas fa-magnifying-glass-location"></i> Search Cool Zones
+      </button>
+      <button class="location-btn" onclick="findCoolZonesNearMe()">
+        <i class="fas fa-location-crosshairs"></i> Use My Location
+      </button>
+    </div>
+
+    <div id="locationStatus">Enter a place in the Philippines or use your live location.</div>
+  </div>
+
+  <div class="map-box">
+    <div id="coolZoneMap"></div>
+  </div>
+
+  <div class="list" id="coolZoneList">
+    <div class="item">
+      <div>
+        <b>Search first to show nearby cool zones</b><br>
+        <small>Cafés, convenience stores, fast food, malls, supermarkets, and libraries will appear here.</small>
+      </div>
+      <div class="rating">❄️</div>
+    </div>
+  </div>
+
+  <button class="add-btn" onclick="toggleForm()">Add a Cool Zone</button>
+
+  <div class="form-container" id="coolZoneForm">
+    <input type="text" id="zoneName" placeholder="Enter Cool Zone Name">
+    <select id="zoneLabel">
+      <option value="">Select Label</option>
+      <option value="Mall">Mall</option>
+      <option value="Convenience Store">Convenience Store</option>
+      <option value="Fast Food">Fast Food</option>
+      <option value="Café">Café</option>
+      <option value="Library">Library</option>
+      <option value="Supermarket">Supermarket</option>
+    </select>
+    <button class="add-btn" onclick="addCoolZone()">Submit Cool Zone</button>
+  </div>
+</div>
+
+<div class="info">
+  <h3>What Makes a Good Cool Zone?</h3>
+  <div class="info-grid">
+    <div class="info-box">✓ Air Conditioning<br><small>Indoor spaces with working AC</small></div>
+    <div class="info-box">✓ Public Access<br><small>Cafés, stores, malls, and food chains</small></div>
+    <div class="info-box">✓ Nearby Location<br><small>Sorted by closest distance</small></div>
+    <div class="info-box">✓ Directions Available<br><small>Open the place in Google Maps</small></div>
+  </div>
+</div>
+
+<footer>
+  <img src="i-neat_logo.png" class="footer-logo" alt="I-neat logo">
+  <h3>I-neat</h3>
+  <p>Stay Cool, Stay Safe</p>
+  <p>Turning the heat into data you can act on</p>
+</footer>
+
+<script>
+  const hamBtn = document.getElementById('hamBtn');
+  const flyMenu = document.getElementById('flyMenu');
+  const featToggle = document.getElementById('featuresToggle');
+  const featuresSub = document.getElementById('featuresSub');
+  const chevron = document.getElementById('chevron');
+
+
+// Mobile Menu
+hamBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  flyMenu.classList.toggle('open');
+});
+
+featToggle.addEventListener('click', () => {
+  featuresSub.classList.toggle('open');
+  chevron.classList.toggle('rotated');
+});
+
+document.addEventListener('click', (e) => {
+  if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+    flyMenu.classList.remove('open');
+  }
+  if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+    desktopFeaturesMenu.classList.remove('open');
+    desktopFeaturesToggle.classList.remove('active');
+  }
+});
+
+let map;
+let userMarker;
+let coolZoneMarkers = [];
+
+const DEFAULT_LOCATION = { lat: 14.5995, lng: 120.9842 }; // Manila default
+const SEARCH_RADIUS = 3000;
+
+function initMap() {
+  map = L.map('coolZoneMap').setView([DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+}
+
+function setStatus(message) {
+  document.getElementById('locationStatus').textContent = message;
+}
+
+function clearMarkers() {
+  if (userMarker) map.removeLayer(userMarker);
+  coolZoneMarkers.forEach(marker => map.removeLayer(marker));
+  coolZoneMarkers = [];
+}
+
+function addSearchLocationMarker(lat, lng, label) {
+  userMarker = L.marker([lat, lng]).addTo(map);
+  userMarker.bindPopup(`<b>${label}</b><br>Search location`).openPopup();
+  map.setView([lat, lng], 15);
+}
+
+async function searchCoolZonesByPlace() {
+  const place = document.getElementById('placeSearch').value.trim();
+
+  if (place === '') {
+    alert('Please enter the place where you will be tomorrow.');
+    return;
+  }
+
+  setStatus('Searching location in the Philippines...');
+
+  try {
+    const location = await geocodePlace(place);
+
+    if (!location) {
+      setStatus('Location not found. Try a more specific place, city, mall, or barangay. Example: SM Baguio, Tagaytay Rotonda, Cebu IT Park.');
+      return;
+    }
+
+    clearMarkers();
+    addSearchLocationMarker(location.lat, location.lng, place);
+    setStatus('Location found. Searching nearest air-conditioned cool zones...');
+    await loadCoolZones(location.lat, location.lng, location.label);
+  } catch (error) {
+    console.error(error);
+    setStatus('Location search failed. The map service may be blocked or busy. Try again or use a more specific place name.');
+  }
+}
+
+async function geocodePlace(place) {
+  const searchText = `${place}, Philippines`;
+  const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=ph&q=${encodeURIComponent(searchText)}`;
+
+  try {
+    const response = await fetch(nominatimUrl, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      const results = await response.json();
+      if (results.length > 0) {
+        return {
+          lat: parseFloat(results[0].lat),
+          lng: parseFloat(results[0].lon),
+          label: results[0].display_name
+        };
+      }
+    }
+  } catch (error) {
+    console.warn('Nominatim failed, trying backup geocoder...', error);
+  }
+
+  // Backup geocoder. This prevents the app from saying "no internet" when only one map service is unavailable.
+  const photonUrl = `https://photon.komoot.io/api/?q=${encodeURIComponent(searchText)}&limit=1`;
+  const backupResponse = await fetch(photonUrl);
+  const backupData = await backupResponse.json();
+
+  if (!backupData.features || backupData.features.length === 0) return null;
+
+  const feature = backupData.features[0];
+  return {
+    lat: feature.geometry.coordinates[1],
+    lng: feature.geometry.coordinates[0],
+    label: feature.properties.name || place
+  };
+}
+
+function findCoolZonesNearMe() {
+  if (!navigator.geolocation) {
+    setStatus('Your browser does not support live location. Please search a place instead.');
+    return;
+  }
+
+  setStatus('Detecting your current location...');
+
+  navigator.geolocation.getCurrentPosition(
+    async position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      clearMarkers();
+      addSearchLocationMarker(lat, lng, 'You are here');
+      setStatus('Location found. Searching nearest air-conditioned cool zones...');
+      await loadCoolZones(lat, lng, 'Your current location');
+    },
+    () => {
+      setStatus('Location permission denied. You can still type the place manually.');
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+  );
+}
+
+async function loadCoolZones(lat, lng, locationName) {
+  const list = document.getElementById('coolZoneList');
+  list.innerHTML = `
+    <div class="item">
+      <div>
+        <b>Loading nearby cool zones...</b><br>
+        <small>Please wait while we search cafés, convenience stores, malls, fast food chains, and supermarkets.</small>
+      </div>
+      <div class="rating">⏳</div>
+    </div>
+  `;
+
+  try {
+    const places = await fetchNearbyPlaces(lat, lng);
+
+    if (places.length === 0) {
+      list.innerHTML = `
+        <div class="item">
+          <div>
+            <b>No cool zones found nearby</b><br>
+            <small>Try searching a wider area or a nearby landmark.</small>
+          </div>
+          <div class="rating">⚠️</div>
+        </div>
+      `;
+      document.getElementById('mappedCount').textContent = 0;
+      setStatus('No nearby cool zones found. Try another location or a larger landmark.');
+      return;
+    }
+
+    displayCoolZones(places, lat, lng);
+    setStatus(`Showing nearest cool zones near ${locationName}. Click “Open in Google Maps” to verify the exact branch.`);
+  } catch (error) {
+    console.error(error);
+    list.innerHTML = `
+      <div class="item">
+        <div>
+          <b>Unable to load nearby places</b><br>
+          <small>The free map services may be busy or blocked. Try again or search a more specific landmark like “SM Manila” or “España Boulevard”.</small>
+        </div>
+        <div class="rating">⚠️</div>
+      </div>
+    `;
+    setStatus('Nearby place search failed. This does not always mean no internet; the free map services may be busy or blocked.');
+  }
+}
+
+async function fetchNearbyPlaces(lat, lng) {
+  /*
+    Search real map data only.
+    First: Overpass API for nearby OpenStreetMap places.
+    Backup: Nominatim search inside a small bounding box around the searched location.
+    No fake/sample locations are generated.
+  */
+  const query = `
+    [out:json][timeout:20];
+    (
+      node["amenity"~"cafe|fast_food|restaurant|library|food_court"](around:${SEARCH_RADIUS},${lat},${lng});
+      way["amenity"~"cafe|fast_food|restaurant|library|food_court"](around:${SEARCH_RADIUS},${lat},${lng});
+      relation["amenity"~"cafe|fast_food|restaurant|library|food_court"](around:${SEARCH_RADIUS},${lat},${lng});
+
+      node["shop"~"convenience|mall|supermarket|department_store"](around:${SEARCH_RADIUS},${lat},${lng});
+      way["shop"~"convenience|mall|supermarket|department_store"](around:${SEARCH_RADIUS},${lat},${lng});
+      relation["shop"~"convenience|mall|supermarket|department_store"](around:${SEARCH_RADIUS},${lat},${lng});
+
+      node["name"~"Uncle John's|Uncle Johns|7-Eleven|7 Eleven|Jollibee|McDonald's|McDonalds|Chowking|Greenwich|KFC|Starbucks|Dunkin|Mang Inasal|McDo|Alfamart|Puregold|SM|Robinsons|Ayala", i](around:${SEARCH_RADIUS},${lat},${lng});
+      way["name"~"Uncle John's|Uncle Johns|7-Eleven|7 Eleven|Jollibee|McDonald's|McDonalds|Chowking|Greenwich|KFC|Starbucks|Dunkin|Mang Inasal|McDo|Alfamart|Puregold|SM|Robinsons|Ayala", i](around:${SEARCH_RADIUS},${lat},${lng});
+      relation["name"~"Uncle John's|Uncle Johns|7-Eleven|7 Eleven|Jollibee|McDonald's|McDonalds|Chowking|Greenwich|KFC|Starbucks|Dunkin|Mang Inasal|McDo|Alfamart|Puregold|SM|Robinsons|Ayala", i](around:${SEARCH_RADIUS},${lat},${lng});
+    );
+    out center tags 80;
+  `;
+
+  const endpoints = [
+    'https://overpass-api.de/api/interpreter',
+    'https://z.overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter'
+  ];
+
+  for (const endpoint of endpoints) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 18000);
+
+      const response = await fetch(`${endpoint}?data=${encodeURIComponent(query)}`, {
+        method: 'GET',
+        signal: controller.signal
+      });
+
+      clearTimeout(timer);
+      if (!response.ok) throw new Error(`Overpass error: ${response.status}`);
+
+      const data = await response.json();
+      const places = cleanPlaces(data.elements || [], lat, lng);
+
+      if (places.length > 0) return places;
+    } catch (error) {
+      console.warn(`${endpoint} failed. Trying next service...`, error);
+    }
+  }
+
+  // Real-data backup if Overpass is blocked/busy.
+  return await fetchPlacesWithNominatim(lat, lng);
+}
+
+async function fetchPlacesWithNominatim(lat, lng) {
+  const boxSize = 0.035; // about 3 to 4 km depending on location
+  const left = lng - boxSize;
+  const right = lng + boxSize;
+  const top = lat + boxSize;
+  const bottom = lat - boxSize;
+
+  const searches = [
+    { q: 'restaurant', type: 'Restaurant' },
+    { q: 'cafe', type: 'Café' },
+    { q: 'fast food', type: 'Fast Food' },
+    { q: 'convenience store', type: 'Convenience Store' },
+    { q: 'mall', type: 'Mall' },
+    { q: 'supermarket', type: 'Supermarket' },
+    { q: 'library', type: 'Library' },
+    { q: 'Jollibee', type: 'Fast Food' },
+    { q: '7-Eleven', type: 'Convenience Store' },
+    { q: 'Alfamart', type: 'Convenience Store' },
+    { q: 'Starbucks', type: 'Café' }
+  ];
+
+  const results = [];
+
+  for (const item of searches) {
+    try {
+      const url =
+        `https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=ph` +
+        `&viewbox=${left},${top},${right},${bottom}&bounded=1&q=${encodeURIComponent(item.q)}`;
+
+      const response = await fetch(url, {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!response.ok) continue;
+
+      const data = await response.json();
+
+      data.forEach(place => {
+        if (!place.lat || !place.lon || !place.display_name) return;
+
+        results.push({
+          name: place.name || place.display_name.split(',')[0],
+          type: item.type,
+          lat: parseFloat(place.lat),
+          lng: parseFloat(place.lon),
+          distance: calculateDistance(lat, lng, parseFloat(place.lat), parseFloat(place.lon))
+        });
+      });
+    } catch (error) {
+      console.warn('Nominatim nearby search failed:', item.q, error);
+    }
+  }
+
+  return dedupeAndSortPlaces(results);
+}
+
+function dedupeAndSortPlaces(places) {
+  const seen = new Set();
+
+  return places
+    .filter(place => {
+      const key = `${place.name.toLowerCase()}-${place.lat.toFixed(5)}-${place.lng.toFixed(5)}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return place.distance <= SEARCH_RADIUS + 800;
+    })
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, 10);
+}
+
+function cleanPlaces(elements, userLat, userLng) {
+  const places = elements
+    .map(place => {
+      const placeLat = place.lat || (place.center && place.center.lat);
+      const placeLng = place.lon || (place.center && place.center.lon);
+
+      if (!placeLat || !placeLng || !place.tags || !isProbablyRealCoolZone(place.tags)) return null;
+
+      const name = place.tags.name || place.tags.brand || place.tags.operator;
+      if (!name) return null;
+
+      return {
+        name,
+        type: getPlaceType(place.tags),
+        lat: placeLat,
+        lng: placeLng,
+        distance: calculateDistance(userLat, userLng, placeLat, placeLng)
+      };
+    })
+    .filter(place => place !== null);
+
+  return dedupeAndSortPlaces(places);
+}
+
+function getPlaceType(tags) {
+  const name = (tags.name || '').toLowerCase();
+  if (name.includes('uncle')) return "Uncle John's / Convenience Store";
+  if (name.includes('jollibee') || name.includes('mcdo') || name.includes('mcdonald') || name.includes('kfc') || name.includes('chowking')) return 'Fast Food';
+  if (name.includes('starbucks') || name.includes('coffee') || name.includes('cafe')) return 'Café';
+  if (tags.amenity === 'cafe') return 'Café';
+  if (tags.amenity === 'fast_food') return 'Fast Food';
+  if (tags.amenity === 'restaurant') return 'Restaurant';
+  if (tags.amenity === 'library') return 'Library';
+  if (tags.shop === 'convenience') return 'Convenience Store';
+  if (tags.shop === 'mall') return 'Mall';
+  if (tags.shop === 'supermarket') return 'Supermarket';
+  if (tags.shop === 'department_store') return 'Department Store';
+  return 'Cool Zone';
+}
+
+
+function makeGoogleMapsLink(place, userLat, userLng) {
+  /*
+    Important:
+    We use the place name + type + nearby coordinates for Google Maps.
+    This is more accurate than using only OpenStreetMap coordinates,
+    because some OSM pins/ways are stored at road/building centers.
+  */
+  const searchQuery = `${place.name} ${place.type} near ${userLat},${userLng}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
+}
+
+function makeDirectionsLink(place, userLat, userLng) {
+  const destinationQuery = `${place.name} ${place.type} near ${userLat},${userLng}`;
+  return `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${encodeURIComponent(destinationQuery)}&travelmode=walking`;
+}
+
+
+
+function isProbablyRealCoolZone(tags) {
+  const hasUsefulCategory =
+    tags.amenity === 'cafe' ||
+    tags.amenity === 'fast_food' ||
+    tags.amenity === 'restaurant' ||
+    tags.amenity === 'library' ||
+    tags.amenity === 'food_court' ||
+    tags.shop === 'convenience' ||
+    tags.shop === 'mall' ||
+    tags.shop === 'supermarket' ||
+    tags.shop === 'department_store';
+
+  const name = (tags.name || '').toLowerCase();
+  const knownBrand =
+    name.includes('starbucks') ||
+    name.includes('alfamart') ||
+    name.includes('7-eleven') ||
+    name.includes('7 eleven') ||
+    name.includes('jollibee') ||
+    name.includes('mcdonald') ||
+    name.includes('mcdo') ||
+    name.includes('kfc') ||
+    name.includes('chowking') ||
+    name.includes('mang inasal') ||
+    name.includes('uncle');
+
+  return hasUsefulCategory || knownBrand;
+}
+
+
+function displayCoolZones(places, userLat, userLng) {
+  const list = document.getElementById('coolZoneList');
+  list.innerHTML = '';
+  document.getElementById('mappedCount').textContent = places.length;
+
+  const bounds = L.latLngBounds([[userLat, userLng]]);
+
+  places.forEach((place, index) => {
+    const distanceKm = (place.distance / 1000).toFixed(2);
+    const mapsLink = makeDirectionsLink(place, userLat, userLng);
+
+    const coolIcon = L.divIcon({
+      html: `<div style="background:#38BDF8;color:white;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,.22);"><i class="fas fa-snowflake"></i></div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      className: ''
+    });
+
+    const marker = L.marker([place.lat, place.lng], { icon: coolIcon }).addTo(map);
+    marker.bindPopup(`<b>${index === 0 ? 'Nearest: ' : ''}${place.name}</b><br>${place.type}<br>${distanceKm} km away<br><a href="${makeGoogleMapsLink(place, userLat, userLng)}" target="_blank">Check in Google Maps</a>`);
+    coolZoneMarkers.push(marker);
+    bounds.extend([place.lat, place.lng]);
+
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.innerHTML = `
+      <div>
+        <b>${index === 0 ? 'Nearest: ' : ''}${place.name}</b><br>
+        <small>${place.type} • ${distanceKm} km away • verify in Google Maps</small>
+      </div>
+      <div class="rating">
+        <a href="${mapsLink}" target="_blank">Open in Google Maps</a>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+
+  map.fitBounds(bounds, { padding: [35, 35] });
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const earthRadius = 6371000;
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return earthRadius * c;
+}
+
+function toRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+
+function toggleForm() {
+  const form = document.getElementById('coolZoneForm');
+  form.style.display = form.style.display === 'block' ? 'none' : 'block';
+}
+
+function addCoolZone() {
+  const zoneName = document.getElementById('zoneName').value;
+  const zoneLabel = document.getElementById('zoneLabel').value;
+
+  if (zoneName === '' || zoneLabel === '') {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  const list = document.getElementById('coolZoneList');
+  const newItem = document.createElement('div');
+  newItem.classList.add('item');
+
+  newItem.innerHTML = `
+    <div>
+      <b>${zoneName}</b><br>
+      <small>${zoneLabel} • User Added</small>
+    </div>
+    <div class="rating">⭐ 5.0</div>
+  `;
+
+  list.appendChild(newItem);
+  document.getElementById('zoneName').value = '';
+  document.getElementById('zoneLabel').value = '';
+  alert('Cool Zone Added Successfully!');
+}
+
+initMap();
+</script>
+</body>
+</html>

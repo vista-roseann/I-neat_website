@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I-neat | Ice-Breaker</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+      color:#0A0A0A;
+    }
+
+    /* HEAT PILL */
+    .heat-pill{
+      position:absolute;
+      top:12px;
+      left:50%;
+      transform:translateX(-50%);
+      width:360px;
+      min-height:36px;
+      padding:7px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      background:#CEFAFE;
+      border-radius:999999px;
+      font-size:14px;
+      font-weight:600;
+      color:#0A0A0A;
+      box-shadow:0px 2px 6px rgba(0,0,0,0.05);
+      z-index:10;
+      white-space:nowrap;
+    }
+
+    .heat-pill i{
+      color:#0092B8;
+    }
+
+    /* HEADER */
+    header.nav{
+      position: relative;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.85);
+      border-bottom:1px solid #F3F4F6;
+      padding:16px 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .brand h1{
+      font-size:22px;
+      margin:0;
+      color:#0A0A0A;
+      font-weight:800;
+      line-height:1.1;
+    }
+
+    .brand p{
+      font-size:12px;
+      color:#6A7282;
+      margin:3px 0 0;
+    }
+
+    nav.menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    nav.menu a,
+    .menu-features {
+      font-size:15px;
+      color:#4A5565;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:0.3s ease;
+      font-weight:500;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-features {
+      padding: 0;
+      border: none;
+      background: none;
+      margin: 0;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active,
+    .menu-features:hover {
+      color:#2B7FFF;
+    }
+
+    .desktop-features-menu {
+      position: absolute;
+      top: 100%;
+      left: -8px;
+      background: white;
+      border: 0.5px solid #E5E7EB;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+      padding: 8px 0;
+      width: 200px;
+      z-index: 9999;
+      display: none;
+      margin-top: 12px;
+    }
+
+    .desktop-features-menu.open { display: block; }
+
+    .desktop-features-menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      color: #4A5565;
+      font-size: 14px;
+      margin: 0;
+      transition: 0.2s ease;
+    }
+
+    .desktop-features-menu a:hover {
+      background: #F0FDFF;
+      color: #00B8DB;
+    }
+
+    .menu-features .chevron-down {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .menu-features.active .chevron-down {
+      transform: rotate(180deg);
+    }
+
+    /* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  }
+  .sub-item:hover { color: #00B8DB; }
+
+  .chevron {
+    transition: transform 0.2s;
+    font-size: 13px;
+  }
+  .chevron.rotated { transform: rotate(180deg); }
+    
+
+
+    /* MAIN */
+    main{
+      padding:80px 20px 60px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#D9F7FF;
+      color:#0092B8;
+      padding:8px 16px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+      margin-bottom:18px;
+    }
+
+    .hero-title{
+      font-size:42px;
+      font-weight:800;
+      margin-bottom:10px;
+      text-align:center;
+    }
+
+    .hero-sub{
+      font-size:16px;
+      color:#6A7282;
+      text-align:center;
+      max-width:700px;
+      line-height:1.7;
+      margin-bottom:50px;
+    }
+
+    /* GRID */
+    .top-grid{
+      display:flex;
+      gap:28px;
+      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+      max-width:1150px;
+    }
+
+    /* ALERT PANEL */
+    .alerts-panel{
+      background:white;
+      width:520px;
+      border-radius:24px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      padding:26px;
+    }
+
+    .panel-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:24px;
+    }
+
+    .panel-title i{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#D9F7FF;
+      color:#0092B8;
+      font-size:18px;
+    }
+
+    .panel-title h3{
+      font-size:20px;
+      font-weight:700;
+    }
+
+    .panel-title p{
+      color:#6A7282;
+      font-size:13px;
+    }
+
+    .alert-card{
+      border-radius:18px;
+      padding:18px;
+      margin-bottom:16px;
+      border:1px solid;
+      transition:0.3s ease;
+      cursor:pointer;
+    }
+
+    .alert-card:hover{
+      transform:translateY(-4px);
+    }
+
+    .alert-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .alert-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .alert-time{
+      font-size:12px;
+      font-weight:500;
+      color:#6A7282;
+      white-space:nowrap;
+    }
+
+    .alert-desc{
+      font-size:13px;
+      color:#4A5565;
+      line-height:1.6;
+      margin-bottom:10px;
+    }
+
+    .alert-temp{
+      font-size:12px;
+      font-weight:700;
+    }
+
+    /* ALERT COLORS */
+    .danger{
+      background:#FFF1F2;
+      border-color:#FECACA;
+    }
+
+    .danger .alert-left i,
+    .danger .alert-temp{
+      color:#EF4444;
+    }
+
+    .warning{
+      background:#FFF7ED;
+      border-color:#FED7AA;
+    }
+
+    .warning .alert-left i,
+    .warning .alert-temp{
+      color:#F97316;
+    }
+
+    .safe{
+      background:#FEFCE8;
+      border-color:#FDE68A;
+    }
+
+    .safe .alert-left i,
+    .safe .alert-temp{
+      color:#EAB308;
+    }
+
+    .rain{
+      background:#EFF6FF;
+      border-color:#BFDBFE;
+    }
+
+    .rain .alert-left i,
+    .rain .alert-temp{
+      color:#2563EB;
+    }
+
+    .cool{
+      background:#ECFEFF;
+      border-color:#A5F3FC;
+    }
+
+    .cool .alert-left i,
+    .cool .alert-temp{
+      color:#0891B2;
+    }
+
+    /* RIGHT SIDE */
+    .side-panel{
+      width:420px;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    /* BLUE CARD */
+    .info-card{
+      background:linear-gradient(135deg,#00B8DB,#155DFC);
+      color:white;
+      border-radius:24px;
+      padding:28px;
+      box-shadow:0px 8px 18px rgba(21,93,252,0.15);
+    }
+
+    .info-card i.main-icon{
+      font-size:30px;
+      margin-bottom:18px;
+    }
+
+    .info-card h3{
+      font-size:22px;
+      margin-bottom:18px;
+    }
+
+    .info-card ul{
+      list-style:none;
+    }
+
+    .info-card li{
+      margin-bottom:14px;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* WEATHER ADVICE */
+    .weather-advice{
+      background:white;
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      border:1px solid #EEF2FF;
+    }
+
+    .weather-advice h3{
+      font-size:20px;
+      margin-bottom:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .weather-advice h3 i{
+      color:#00B8DB;
+    }
+
+    .weather-advice p{
+      font-size:14px;
+      color:#4A5565;
+      line-height:1.7;
+      margin-bottom:14px;
+    }
+
+    .advice-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .advice-item{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:13px;
+      color:#4A5565;
+      background:#F9FAFB;
+      padding:10px 12px;
+      border-radius:14px;
+    }
+
+    .advice-item i{
+      color:#0092B8;
+      margin-top:3px;
+    }
+
+    /* SETTINGS */
+    .settings{
+      background:white;
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .settings h3{
+      margin-bottom:18px;
+      font-size:20px;
+    }
+
+    .setting-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+      font-size:14px;
+      color:#4A5565;
+    }
+
+    input[type="checkbox"]{
+      width:18px;
+      height:18px;
+      accent-color:#00B8DB;
+      cursor:pointer;
+    }
+
+    /* SCENARIOS */
+    .scenario-wrapper{
+      width:100%;
+      max-width:1050px;
+      margin-top:50px;
+      background:white;
+      border-radius:26px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      padding:36px;
+    }
+
+    .scenario-title{
+      text-align:center;
+      margin-bottom:32px;
+    }
+
+    .scenario-title h2{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .scenario-title p{
+      color:#6A7282;
+      font-size:14px;
+    }
+
+    .scenario-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+    }
+
+    .scenario-card{
+      background:#F9FAFB;
+      border-radius:22px;
+      padding:24px;
+      text-align:center;
+      transition:0.3s ease;
+      border:1px solid #F3F4F6;
+    }
+
+    .scenario-card:hover{
+      transform:translateY(-5px);
+      background:white;
+      box-shadow:0px 8px 18px rgba(0,0,0,0.06);
+    }
+
+    .scenario-icon{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      margin:0 auto 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+    }
+
+    .orange{
+      background:#FFF7ED;
+      color:#F97316;
+    }
+
+    .blue{
+      background:#EFF6FF;
+      color:#2563EB;
+    }
+
+    .cyan{
+      background:#ECFEFF;
+      color:#06B6D4;
+    }
+
+    .scenario-card h4{
+      margin-bottom:12px;
+      font-size:18px;
+    }
+
+    .scenario-card p{
+      color:#6A7282;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#F9FAFB;
+      border-top:1px solid #F3F4F6;
+      padding:40px 20px;
+      margin-top:70px;
+      text-align:center;
+    }
+
+    .footer-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .footer-logo{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+      margin-bottom:10px;
+    }
+
+    .footer-text h2{
+      font-size:24px;
+      color:#0A0A0A;
+      margin-bottom:4px;
+    }
+
+    .footer-text p{
+      color:#6A7282;
+      font-size:14px;
+      margin-bottom:5px;
+    }
+
+    /* MOBILE */
+    @media(max-width:950px){
+      header.nav{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      nav.menu{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:10px;
+      }
+
+      nav.menu a{
+        margin:0 6px;
+      }
+
+      .hero-title{
+        font-size:34px;
+      }
+
+      .alerts-panel,
+      .side-panel{
+        width:100%;
+      }
+
+      .top-grid{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .heat-pill{
+        display:none;
+      }
+    }
+  
+
+/* =========================================================
+   RESPONSIVE FIX: phone / tablet / desktop friendly layout
+   ========================================================= */
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+/* Extra lock to prevent forced dark mode layout/color issues */
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+  <!-- HEAT PILL -->
+  <div class="heat-pill">
+    <i class="fa-solid fa-cloud-sun"></i>
+    <span>I-neat Weather Tip:</span>
+    <span id="currentDeviceTemp">Detecting now...</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="nav">
+    <div class="brand-group">
+      <img src="i-neat_logo.png" class="logo" alt="I-neat logo">
+      <div class="brand">
+        <h1>I-neat</h1>
+        <p>Stay Cool, Stay Safe</p>
+      </div>
+    </div>
+    
+<div style="display:flex; align-items:center; gap:10px;">
+  <a href="index.html" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <button class="ham-btn" id="hamBtn" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<div class="fly-menu" id="flyMenu">
+  <div class="menu-item" id="featuresToggle">
+    <span class="menu-label"><i class="fas fa-star"></i> Features</span>
+    <i class="fas fa-chevron-down chevron" id="chevron"></i>
+  </div>
+  <div class="features-sub" id="featuresSub">
+    
+    <a class="sub-item" href="coolzones.html"><i class="fas fa-map-marker-alt"></i> Cool Zones</a>
+    <a class="sub-item" href="heatsync.html"><i class="fas fa-fire"></i> Heat-Sync</a>
+  </div>
+  <a class="menu-item" href="about.html">
+    <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+  </a>
+  <a class="menu-item" href="contact.html">
+    <span class="menu-label"><i class="fas fa-envelope"></i> Contact</span>
+  </a>
+</div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <div class="badge">
+      <i class="fas fa-bell"></i>
+      Smart Weather Notifications
+    </div>
+
+    <h1 class="hero-title">Ice-Breaker Alerts</h1>
+
+    <p class="hero-sub">
+      Get smart notifications based on the current weather. I-neat tells you what to wear,
+      what to bring, and what to do whether it is very hot, cloudy, or about to rain.
+    </p>
+
+    <!-- TOP GRID -->
+    <section class="top-grid">
+      <!-- ALERTS -->
+      <div class="alerts-panel">
+        <div class="panel-title">
+          <i class="fas fa-bell"></i>
+          <div>
+            <h3>Today's Alerts</h3>
+            <p id="weatherSummary">Checking your local weather...</p>
+          </div>
+        </div>
+
+        <!-- ALERT 1 -->
+        <div class="alert-card danger" id="mainAlert">
+          <div class="alert-top">
+            <div class="alert-left">
+              <i class="fas fa-circle-notch fa-spin"></i>
+              <span>Loading Weather</span>
+            </div>
+            <div class="alert-time">Now</div>
+          </div>
+          <p class="alert-desc">Please allow location access so I-neat can give weather-based advice.</p>
+          <div class="alert-temp">● Detecting</div>
+        </div>
+
+        <!-- ALERT 2 -->
+        <div class="alert-card warning" id="wearAlert">
+          <div class="alert-top">
+            <div class="alert-left">
+              <i class="fas fa-shirt"></i>
+              <span>What to Wear</span>
+            </div>
+            <div class="alert-time">Today</div>
+          </div>
+          <p class="alert-desc">Wear comfortable clothes while we check the weather.</p>
+          <div class="alert-temp">● Outfit tip</div>
+        </div>
+
+        <!-- ALERT 3 -->
+        <div class="alert-card safe" id="bringAlert">
+          <div class="alert-top">
+            <div class="alert-left">
+              <i class="fas fa-bag-shopping"></i>
+              <span>What to Bring</span>
+            </div>
+            <div class="alert-time">Before leaving</div>
+          </div>
+          <p class="alert-desc">Check your bag before going out: water, towel, and umbrella if needed.</p>
+          <div class="alert-temp">● Bag checklist</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="side-panel">
+        <!-- BLUE CARD -->
+        <div class="info-card">
+          <i class="fas fa-cloud-sun main-icon"></i>
+          <h3>What Makes Ice-Breaker Different?</h3>
+          <ul>
+            <li><i class="fas fa-check"></i> Gives advice based on live temperature and rain chance</li>
+            <li><i class="fas fa-check"></i> Suggests what to wear and what to bring</li>
+            <li><i class="fas fa-check"></i> Warns you before peak heat or rainy conditions</li>
+            <li><i class="fas fa-check"></i> Turns weather data into simple daily reminders</li>
+          </ul>
+        </div>
+
+        <!-- WEATHER ADVICE -->
+        <div class="weather-advice">
+          <h3><i class="fas fa-lightbulb"></i> Quick Weather Tip</h3>
+          <p id="quickTip">Waiting for your local weather...</p>
+          <div class="advice-list">
+            <div class="advice-item"><i class="fas fa-shirt"></i><span id="wearTip">Wear light and comfortable clothes.</span></div>
+            <div class="advice-item"><i class="fas fa-umbrella"></i><span id="bringTip">Bring water and check if you need an umbrella.</span></div>
+            <div class="advice-item"><i class="fas fa-person-walking"></i><span id="actionTip">Plan your outdoor activity safely.</span></div>
+          </div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="settings">
+          <h3>Alert Settings</h3>
+          <div class="setting-row"><span>Extreme Heat Alerts</span><input type="checkbox" checked></div>
+          <div class="setting-row"><span>Rain / Umbrella Reminder</span><input type="checkbox" checked></div>
+          <div class="setting-row"><span>What to Wear Tip</span><input type="checkbox" checked></div>
+          <div class="setting-row"><span>Hydration Reminder</span><input type="checkbox" checked></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENARIOS -->
+    <section class="scenario-wrapper">
+      <div class="scenario-title">
+        <h2>Sample Alert Scenarios</h2>
+        <p>Real examples of weather-based alerts generated by I-neat</p>
+      </div>
+
+      <div class="scenario-grid">
+        <div class="scenario-card">
+          <div class="scenario-icon orange"><i class="fas fa-sun"></i></div>
+          <h4>Hot Weather Alert</h4>
+          <p>It is very hot today. Wear light-colored clothes, drink water, and avoid walking under direct sunlight.</p>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-icon blue"><i class="fas fa-cloud-rain"></i></div>
+          <h4>Rain Alert</h4>
+          <p>There is a chance of rain today. Bring an umbrella and use shoes that are safe for wet roads.</p>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-icon cyan"><i class="fas fa-glass-water"></i></div>
+          <h4>Hydration Alert</h4>
+          <p>If you will stay outside for a long time, bring water and take short breaks in shaded or cool areas.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <img src="i-neat_logo.png" class="footer-logo" alt="I-neat logo">
+      <div class="footer-text">
+        <h2>I-neat</h2>
+        <p>Stay Cool, Stay Safe</p>
+        <p>Turning the heat into data you can act on</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+  const hamBtn = document.getElementById('hamBtn');
+  const flyMenu = document.getElementById('flyMenu');
+  const featToggle = document.getElementById('featuresToggle');
+  const featuresSub = document.getElementById('featuresSub');
+  const chevron = document.getElementById('chevron');
+
+    // Mobile Menu
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+      if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+        desktopFeaturesMenu.classList.remove('open');
+        desktopFeaturesToggle.classList.remove('active');
+      }
+    });
+
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function formatTimeLabel() {
+      return new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function setDeviceTempLabel(message) {
+      setText('currentDeviceTemp', message);
+    }
+
+    function setCard(cardId, type, iconClass, title, time, description, badge) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+
+      card.className = `alert-card ${type}`;
+      const icon = card.querySelector('.alert-left i');
+      const titleSpan = card.querySelector('.alert-left span');
+      const timeEl = card.querySelector('.alert-time');
+      const desc = card.querySelector('.alert-desc');
+      const temp = card.querySelector('.alert-temp');
+
+      if (icon) icon.className = iconClass;
+      if (titleSpan) titleSpan.textContent = title;
+      if (timeEl) timeEl.textContent = time;
+      if (desc) desc.textContent = description;
+      if (temp) temp.textContent = badge;
+    }
+
+    function getWeatherAdvice(temp, rainChance, humidity, weatherCode) {
+      const isRainCode = [51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(weatherCode);
+      const willRain = rainChance >= 45 || isRainCode;
+      const veryHot = temp >= 38;
+      const hot = temp >= 33;
+      const warm = temp >= 29;
+
+      let main = {
+        type: 'safe',
+        icon: 'fas fa-circle-check',
+        title: 'Weather Looks Manageable',
+        desc: `It is ${temp}°C right now. You can go out, but still bring water and avoid staying too long under direct sunlight.`,
+        badge: `● ${temp}°C`
+      };
+
+      let wear = 'Wear breathable clothes and comfortable shoes.';
+      let bring = 'Bring water before going out.';
+      let action = 'Plan outdoor activities with short breaks.';
+      let quick = 'Weather is okay, but stay prepared and hydrated.';
+
+      if (willRain && hot) {
+        main = {
+          type: 'rain',
+          icon: 'fas fa-cloud-sun-rain',
+          title: 'Hot and Possible Rain',
+          desc: `It is ${temp}°C with about ${rainChance}% rain chance. Bring an umbrella that can protect you from both sun and rain.`,
+          badge: `● ${temp}°C • ${rainChance}% rain`
+        };
+        wear = 'Wear light clothes, but choose footwear that is safe on wet roads.';
+        bring = 'Bring an umbrella, water bottle, and small towel.';
+        action = 'Use shaded paths and avoid rushing because heat plus humidity can feel heavier.';
+        quick = 'Hot and possibly rainy: bring an umbrella, water, and wear light clothes.';
+      } else if (willRain) {
+        main = {
+          type: 'rain',
+          icon: 'fas fa-cloud-rain',
+          title: 'Rain Reminder',
+          desc: `There is about ${rainChance}% chance of rain today. Bring an umbrella or raincoat before leaving.`,
+          badge: `● ${rainChance}% rain chance`
+        };
+        wear = 'Wear comfortable clothes and avoid shoes that get slippery when wet.';
+        bring = 'Bring an umbrella or raincoat, and protect your phone or documents.';
+        action = 'Leave earlier because rain can slow down traffic and walking.';
+        quick = 'Possible rain today: bring an umbrella and wear safe footwear.';
+      } else if (veryHot) {
+        main = {
+          type: 'danger',
+          icon: 'fas fa-triangle-exclamation',
+          title: 'Extreme Heat Alert',
+          desc: `It is ${temp}°C outside. Avoid long walks, drink water now, and find shade or an air-conditioned place when possible.`,
+          badge: `● ${temp}°C`
+        };
+        wear = 'Wear light-colored, loose, breathable clothes. Avoid thick jackets or dark colors.';
+        bring = 'Bring water, umbrella, cap, fan, and a small towel.';
+        action = 'Avoid outdoor errands from 10 AM to 4 PM and rest in cool zones often.';
+        quick = 'Very hot today: hydrate, wear light clothes, and avoid direct sunlight.';
+      } else if (hot) {
+        main = {
+          type: 'warning',
+          icon: 'fas fa-sun',
+          title: 'Heat Rising',
+          desc: `It is ${temp}°C. Wear light clothes and bring water. Use an umbrella for sun protection if you will walk outside.`,
+          badge: `● ${temp}°C`
+        };
+        wear = 'Wear light-colored clothes, breathable fabric, and comfortable shoes.';
+        bring = 'Bring water, umbrella, and tissue or towel for sweat.';
+        action = 'Walk on shaded routes and take breaks if you feel dizzy or tired.';
+        quick = 'Hot weather: light clothes, water, umbrella, and shade breaks.';
+      } else if (warm) {
+        main = {
+          type: 'cool',
+          icon: 'fas fa-cloud-sun',
+          title: 'Warm Weather Tip',
+          desc: `It is ${temp}°C. Weather is warm, so stay hydrated and wear something comfortable.`,
+          badge: `● ${temp}°C`
+        };
+        wear = 'Wear comfortable clothes suitable for warm weather.';
+        bring = 'Bring water. Umbrella is optional unless you will stay outside long.';
+        action = 'Good time for errands, but avoid staying too long under direct sun.';
+        quick = 'Warm today: wear comfortable clothes and bring water.';
+      }
+
+      if (humidity >= 75 && !willRain) {
+        quick += ' It may also feel humid, so bring a towel and drink more water.';
+        bring += ' Since it is humid, a small towel can help.';
+      }
+
+      return { main, wear, bring, action, quick, willRain };
+    }
+
+    function updateIcebreakerAlerts(weather) {
+      const temp = Math.round(weather.temp);
+      const rainChance = Math.round(weather.rainChance || 0);
+      const humidity = Math.round(weather.humidity || 0);
+      const weatherCode = weather.weatherCode || 0;
+      const advice = getWeatherAdvice(temp, rainChance, humidity, weatherCode);
+      const now = formatTimeLabel();
+
+      setDeviceTempLabel(`${temp}°C now • ${rainChance}% rain`);
+      setText('weatherSummary', `${temp}°C now • ${humidity || '--'}% humidity • ${rainChance}% rain chance`);
+
+      setCard(
+        'mainAlert',
+        advice.main.type,
+        advice.main.icon,
+        advice.main.title,
+        now,
+        advice.main.desc,
+        advice.main.badge
+      );
+
+      setCard(
+        'wearAlert',
+        advice.willRain ? 'rain' : (temp >= 33 ? 'warning' : 'cool'),
+        'fas fa-shirt',
+        'What to Wear',
+        'Today',
+        advice.wear,
+        '● Outfit tip'
+      );
+
+      setCard(
+        'bringAlert',
+        advice.willRain ? 'rain' : (temp >= 38 ? 'danger' : 'safe'),
+        advice.willRain ? 'fas fa-umbrella' : 'fas fa-bottle-water',
+        advice.willRain ? 'Bring Umbrella' : 'What to Bring',
+        'Before leaving',
+        advice.bring,
+        advice.willRain ? '● Umbrella needed' : '● Hydration reminder'
+      );
+
+      setText('quickTip', advice.quick);
+      setText('wearTip', advice.wear);
+      setText('bringTip', advice.bring);
+      setText('actionTip', advice.action);
+    }
+
+    async function fetchWeather(lat, lon) {
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code&hourly=precipitation_probability&forecast_days=1&timezone=auto`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Weather API failed');
+        const data = await response.json();
+
+        const current = data.current || {};
+        const hourly = data.hourly || {};
+        const temp = Number(current.temperature_2m);
+        const humidity = Number(current.relative_humidity_2m);
+        const weatherCode = Number(current.weather_code);
+
+        let rainChance = 0;
+        if (Array.isArray(hourly.precipitation_probability) && hourly.precipitation_probability.length) {
+          const currentHour = new Date().getHours();
+          rainChance = Number(hourly.precipitation_probability[currentHour] ?? hourly.precipitation_probability[0] ?? 0);
+        }
+
+        if (!Number.isFinite(temp)) throw new Error('Temperature unavailable');
+
+        updateIcebreakerAlerts({ temp, humidity, rainChance, weatherCode });
+      } catch (error) {
+        console.warn('Unable to fetch live weather:', error);
+        setDeviceTempLabel('Weather unavailable');
+        setText('weatherSummary', 'Unable to load live weather. Showing general safety tips.');
+        updateIcebreakerAlerts({ temp: 34, humidity: 70, rainChance: 20, weatherCode: 1 });
+      }
+    }
+
+    function handleGeoSuccess(position) {
+      const { latitude, longitude } = position.coords;
+      fetchWeather(latitude, longitude);
+    }
+
+    function handleGeoError() {
+      setDeviceTempLabel('Location off');
+      setText('weatherSummary', 'Location access is off. Showing general heat safety tips.');
+      updateIcebreakerAlerts({ temp: 34, humidity: 70, rainChance: 20, weatherCode: 1 });
+    }
+
+    function initIcebreaker() {
+      if (!navigator.geolocation) {
+        handleGeoError();
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      });
+
+      if (navigator.geolocation.watchPosition) {
+        navigator.geolocation.watchPosition(handleGeoSuccess, () => {}, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        });
+      }
+    }
+
+    initIcebreaker();
+
+    // SETTINGS TOGGLE INTERACTION
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(box => {
+      box.addEventListener('change', () => {
+        console.log(box.checked ? 'Alert Enabled' : 'Alert Disabled');
+      });
+    });
+
+    // ALERT CARD CLICK EFFECT
+    const cards = document.querySelectorAll('.alert-card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          card.style.transform = 'translateY(-4px)';
+        }, 150);
+      });
+    });
+  </script>
+</body>
+</html>

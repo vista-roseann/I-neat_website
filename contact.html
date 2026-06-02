@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I-neat | Contact</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background:linear-gradient(180deg,#ECFEFF 0%,#FFFFFF 50%,#EFF6FF 100%);
+      color:#0A0A0A;
+    }
+
+    /* HEADER */
+    header.nav{
+      position: relative;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.85);
+      border-bottom:1px solid #F3F4F6;
+      padding:16px 24px;
+    }
+
+    .brand-group{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      margin-right:0;
+    }
+
+    .brand h1{
+      font-size:22px;
+      font-weight:700;
+      margin:0;
+    }
+
+    .brand p{
+      font-size:12px;
+      color:#6A7282;
+      margin:3px 0 0 0;
+    }
+
+    nav.menu a{
+      margin:0 12px;
+      text-decoration:none;
+      color:#4A5565;
+      font-size:15px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:0.3s ease;
+    }
+
+    nav.menu a:hover,
+    nav.menu a.active{
+      color:#2B7FFF;
+    }
+
+   /* HAMBURGER BUTTON */
+.ham-btn {
+  background: none;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.ham-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #4A5565;
+  border-radius: 2px;
+}
+
+/* FLYOUT MENU */
+.fly-menu {
+  position: absolute;
+  top: 88px;
+  right: 24px;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 10px 0;
+  width: 220px;
+  z-index: 9999;
+  display: none;
+}
+.fly-menu.open { display: block; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4A5565;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.menu-item:hover { background: #F0FDFF; color: #00B8DB; }
+
+.features-sub {
+  display: none;
+  background: #F8FAFB;
+  border-top: 0.5px solid #E5E7EB;
+  border-bottom: 0.5px solid #E5E7EB;
+}
+.features-sub.open { display: block; }
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 46px;
+  font-size: 13px;
+  color: #4A5565;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.sub-item:hover { color: #00B8DB; }
+
+.chevron {
+  transition: transform 0.2s;
+  font-size: 13px;
+}
+.chevron.rotated { transform: rotate(180deg); }
+
+    /* MAIN */
+    main{
+      padding:60px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .hero-title{
+      font-size:42px;
+      font-weight:700;
+      margin-bottom:12px;
+      text-align:center;
+    }
+
+    .hero-sub{
+      color:#6A7282;
+      font-size:15px;
+      text-align:center;
+      max-width:700px;
+      line-height:1.7;
+      margin-bottom:45px;
+    }
+
+  
+    .contact-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+      width:100%;
+      max-width:1050px;
+      margin-bottom:28px;
+    }
+
+    .contact-card{
+      background:white;
+      border-radius:24px;
+      padding:28px;
+      text-align:center;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      transition:0.3s ease;
+    }
+
+    .contact-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0px 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .contact-icon{
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:#D9F7FF;
+      color:#06B6D4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 18px;
+      font-size:22px;
+    }
+
+    .contact-card h3{
+      margin-bottom:10px;
+      font-size:20px;
+    }
+
+    .contact-card p{
+      color:#6A7282;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+  
+    .main-grid{
+      width:100%;
+      max-width:1050px;
+      display:flex;
+      gap:24px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .form-card{
+      background:white;
+      width:540px;
+      border-radius:26px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+      padding:30px;
+    }
+
+    .section-title{
+      font-size:24px;
+      margin-bottom:24px;
+      font-weight:700;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .input-group input,
+    .input-group textarea{
+      width:100%;
+      padding:14px 16px;
+      border:1px solid #E5E7EB;
+      border-radius:14px;
+      font-family:'Poppins', sans-serif;
+      font-size:14px;
+      outline:none;
+      transition:0.3s ease;
+      background:#F9FAFB;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus{
+      border-color:#06B6D4;
+      background:white;
+    }
+
+    textarea{
+      resize:none;
+      height:140px;
+    }
+
+    .send-btn{
+      width:100%;
+      border:none;
+      background:linear-gradient(90deg,#00B8DB,#155DFC);
+      color:white;
+      padding:15px;
+      border-radius:16px;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s ease;
+      font-family:'Poppins', sans-serif;
+    }
+
+    .send-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0px 10px 18px rgba(21,93,252,0.18);
+    }
+
+    .side-panel{
+      width:420px;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .office-card{
+      background:white;
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .office-header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .office-header i{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:#D9F7FF;
+      color:#06B6D4;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .office-header h3{
+      font-size:20px;
+    }
+
+    .office-card p{
+      color:#6A7282;
+      line-height:1.7;
+      font-size:14px;
+      margin-bottom:20px;
+    }
+
+    .map-box{
+      width:100%;
+      height:230px;
+      background:linear-gradient(135deg,#E0F2FE,#DBEAFE);
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid #BFDBFE;
+    }
+
+    .map-box iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+    }
+
+    .map-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:14px;
+      color:#155DFC;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .form-status{
+      display:none;
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:#ECFDF5;
+      border:1px solid #BBF7D0;
+      color:#166534;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* FOLLOW CARD */
+    .follow-card{
+      background:linear-gradient(135deg,#00B8DB,#155DFC);
+      border-radius:24px;
+      padding:28px;
+      color:white;
+      box-shadow:0px 10px 20px rgba(21,93,252,0.15);
+    }
+
+    .follow-card h3{
+      font-size:22px;
+      margin-bottom:12px;
+    }
+
+    .follow-card p{
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:22px;
+      opacity:0.95;
+    }
+
+    .socials{
+      display:flex;
+      gap:14px;
+    }
+
+    .socials a{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      text-decoration:none;
+      transition:0.3s ease;
+    }
+
+    .socials a:hover{
+      transform:translateY(-3px);
+      background:white;
+      color:#155DFC;
+    }
+
+    .emergency-card{
+      background:#FFF7ED;
+      border:1px solid #FDBA74;
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .emergency-card h3{
+      color:#C2410C;
+      margin-bottom:10px;
+      font-size:18px;
+    }
+
+    .emergency-card p{
+      color:#9A3412;
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:12px;
+    }
+
+    .emergency-number{
+      font-size:32px;
+      font-weight:700;
+      color:#EA580C;
+    }
+
+    .faq-wrapper{
+      width:100%;
+      max-width:900px;
+      margin-top:45px;
+      background:white;
+      border-radius:26px;
+      padding:36px;
+      box-shadow:0px 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .faq-title{
+      text-align:center;
+      font-size:28px;
+      font-weight:700;
+      margin-bottom:26px;
+    }
+
+    .faq-item{
+      border:1px solid #F3F4F6;
+      border-radius:16px;
+      margin-bottom:14px;
+      overflow:hidden;
+    }
+
+    .faq-question{
+      width:100%;
+      background:white;
+      border:none;
+      padding:18px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+      font-size:15px;
+      font-weight:600;
+      font-family:'Poppins', sans-serif;
+    }
+
+    .faq-question:hover{
+      background:#F9FAFB;
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:0.3s ease;
+      background:#F9FAFB;
+      padding:0 22px;
+    }
+
+    .faq-answer p{
+      padding:18px 0;
+      color:#6A7282;
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .faq-item.active .faq-answer{
+      max-height:180px;
+    }
+
+    .faq-item.active .faq-question i{
+      transform:rotate(90deg);
+    }
+
+    /* FOOTER */
+    footer{
+      background:#F9FAFB;
+      border-top:1px solid #F3F4F6;
+      padding:40px 20px;
+      margin-top:70px;
+      text-align:center;
+    }
+
+    .footer-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .footer-logo{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+      margin-bottom:10px;
+    }
+
+    .footer-text h2{
+      font-size:24px;
+      margin-bottom:4px;
+    }
+
+    .footer-text p{
+      color:#6A7282;
+      font-size:14px;
+      margin-bottom:4px;
+    }
+
+    /* MOBILE */
+    @media(max-width:950px){
+
+      header.nav{
+        flex-direction:column;
+        gap:18px;
+      }
+
+      nav.menu{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero-title{
+        font-size:34px;
+      }
+
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-card,
+      .side-panel{
+        width:100%;
+      }
+
+    }
+
+  
+
+
+html {
+  color-scheme: light;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #ECFEFF 0%, #FFFFFF 50%, #EFF6FF 100%) !important;
+}
+
+img, svg, iframe, video, canvas {
+  max-width: 100%;
+}
+
+* {
+  min-width: 0;
+}
+
+header.nav {
+  gap: 18px;
+}
+
+.brand-group {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: contain !important;
+  margin-right: 0 !important;
+}
+
+.app-logo {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.brand p {
+  margin-left: 0 !important;
+  margin-top: 3px !important;
+}
+
+nav.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav.menu a,
+.menu-features {
+  margin: 0 !important;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  font-size: 15px;
+  color: #4A5565;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.menu-features {
+  padding: 0;
+  border: none;
+  background: none;
+  margin: 0 !important;
+}
+
+nav.menu a:hover,
+nav.menu a.active,
+.menu-features:hover {
+  color: #2B7FFF;
+}
+
+.desktop-features-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 0.5px solid #E5E7EB;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  padding: 8px 0;
+  width: 200px;
+  z-index: 9999;
+  display: none;
+  margin-top: 12px;
+}
+
+.desktop-features-menu.open { display: block; }
+
+.desktop-features-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  color: #4A5565;
+  font-size: 14px;
+  margin: 0;
+  transition: 0.2s ease;
+  border-radius: 0;
+  background: none;
+  white-space: normal;
+}
+
+.desktop-features-menu a:hover {
+  background: #F0FDFF;
+  color: #00B8DB;
+}
+
+.menu-features .chevron-down {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.menu-features.active .chevron-down {
+  transform: rotate(180deg);
+}
+
+main,
+.homepage,
+.coolzones {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero,
+.cards,
+.who-we-help,
+.sdg,
+.why-matters,
+.features,
+.map,
+.info,
+.overview,
+.risk-wrapper,
+.scenario-wrapper,
+.faq-wrapper,
+.contact-grid,
+.main-grid,
+.top-grid {
+  max-width: 1088px;
+  width: min(100% - 32px, 1088px);
+  box-sizing: border-box;
+}
+
+.card,
+.sdg-card,
+.audience,
+.contact-card,
+.scenario-card,
+.info-box,
+.item,
+.heat-card,
+.alerts-panel,
+.side-panel,
+.form-card,
+.office-card,
+.why-card,
+.tips-card,
+.settings,
+.emergency-card {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.hero-title,
+.main-title,
+.hero h2,
+main.homepage h2,
+.coolzones h2 {
+  font-size: clamp(30px, 6vw, 52px) !important;
+  line-height: 1.15;
+}
+
+.hero p,
+main.homepage p,
+.coolzones p,
+.main-sub,
+.hero-sub {
+  font-size: clamp(14px, 2.7vw, 18px) !important;
+  line-height: 1.7;
+}
+
+.cards,
+.sdg,
+.features,
+.contact-grid,
+.scenario-grid,
+.info-grid,
+.audiences {
+  display: grid;
+  gap: 20px;
+}
+
+.audiences {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+}
+
+.audience {
+  padding: 18px 12px !important;
+}
+
+.audience h4 {
+  font-size: clamp(15px, 3.6vw, 18px) !important;
+  line-height: 1.2;
+}
+
+.audience p {
+  font-size: clamp(12px, 3vw, 14px) !important;
+  line-height: 1.55;
+}
+
+.cards,
+.sdg,
+.features {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+.contact-grid,
+.info-grid,
+.scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)) !important;
+}
+
+.overview ul,
+.stats,
+.insights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.overview li,
+.stats .card,
+.insights .card {
+  flex: 1 1 220px;
+  max-width: 300px;
+}
+
+.top-grid,
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heat-card,
+.alerts-panel,
+.form-card {
+  flex: 1 1 440px;
+  max-width: 540px;
+  width: auto !important;
+}
+
+.side-panel {
+  flex: 1 1 320px;
+  max-width: 430px;
+  width: auto !important;
+}
+
+.heatmeter {
+  width: min(100%, 600px) !important;
+  height: auto !important;
+}
+
+.map {
+  width: min(100% - 32px, 1180px) !important;
+}
+
+.map-box {
+  height: clamp(320px, 58vh, 480px) !important;
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-row input {
+  flex: 1 1 260px;
+}
+
+.search-btn,
+.location-btn,
+.add-btn {
+  flex: 0 1 auto;
+}
+
+.footer-logo {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  left: 0 !important;
+}
+
+@media (max-width: 900px) {
+  header.nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 14px 16px !important;
+  }
+
+  nav.menu {
+    justify-content: center;
+  }
+
+  .hero,
+  .who-we-help,
+  .why-matters,
+  .scenario-wrapper,
+  .risk-wrapper,
+  .faq-wrapper,
+  .map,
+  .info {
+    width: min(100% - 24px, 1088px);
+    padding: 28px 18px !important;
+  }
+
+  .hero {
+    margin-top: 24px !important;
+  }
+
+  .audiences {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .item {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 15px;
+  }
+
+  .heat-pill {
+    display: none !important;
+  }
+
+  main,
+  main.homepage,
+  .coolzones {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .brand h1 {
+    font-size: 20px !important;
+  }
+
+  nav.menu {
+    gap: 8px;
+  }
+
+  nav.menu a {
+    font-size: 13px !important;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #F9FAFB;
+  }
+
+  .cards,
+  .sdg,
+  .features,
+  .contact-grid,
+  .scenario-grid,
+  .info-grid,
+  .audiences {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card,
+  .sdg-card,
+  .contact-card,
+  .scenario-card,
+  .heat-card,
+  .alerts-panel,
+  .form-card,
+  .office-card,
+  .why-card,
+  .tips-card,
+  .settings,
+  .emergency-card {
+    padding: 22px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .who-we-help h3,
+  .scenario-title h2,
+  .risk-title,
+  .faq-title {
+    font-size: 24px !important;
+  }
+
+  .sdg-icon-wrap {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .sdg-icon {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-row input,
+  .search-btn,
+  .location-btn,
+  .add-btn {
+    width: 100% !important;
+  }
+
+  .map-box {
+    height: 360px !important;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .rating,
+  .rating a {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+  
+
+:root { color-scheme: light only; }
+body, header.nav, footer, .card, .sdg-card, .who-we-help, .map, .info, .overview li, .contact-card, .form-card, .office-card, .faq-wrapper, .scenario-wrapper, .risk-wrapper, .heat-card, .alerts-panel, .settings, .why-card { forced-color-adjust: none; }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="nav">
+
+    <div class="brand-group">
+
+      <img src="i-neat_logo.png" class="logo">
+
+      <div class="brand">
+        <h1>I-neat</h1>
+        <p>Stay Cool, Stay Safe</p>
+      </div>
+
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+ <a href="index.html" class="home-btn" style="display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#4A5565; text-decoration:none; padding:8px 14px; border:1.5px solid #E5E7EB; border-radius:8px; background:none;">
+  <i class="fas fa-home"></i> Home
+</a>
+  <button class="ham-btn" id="hamBtn" aria-labeal="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+
+<div class="fly-menu" id="flyMenu">
+  <div class="menu-item" id="featuresToggle">
+    <span class="menu-label"><i class="fas fa-star"></i> Features</span>
+    <i class="fas fa-chevron-down chevron" id="chevron"></i>
+  </div>
+  <div class="features-sub" id="featuresSub">
+    <a class="sub-item" href="icebreaker.html"><i class="fas fa-snowflake"></i> Icebreaker</a>
+    <a class="sub-item" href="coolzones.html"><i class="fas fa-map-marker-alt"></i> Cool Zones</a>
+    <a class="sub-item" href="heatsync.html"><i class="fas fa-fire"></i> Heat-Sync</a>
+  </div>
+  <a class="menu-item" href="about.html">
+    <span class="menu-label"><i class="fas fa-info-circle"></i> About</span>
+  </a>
+</div>
+
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <h1 class="hero-title">Contact I-neat</h1>
+
+    <p class="hero-sub">
+      Questions, suggestions, or emergency concerns?
+      Reach out and let’s work together to stay cool and safe.
+    </p>
+
+    <!-- CONTACT CARDS -->
+    <section class="contact-grid">
+
+      <div class="contact-card">
+
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+
+        <h3>Email Us</h3>
+
+        <p>
+          For general inquiries <br>
+          hello@i-neat.ph
+        </p>
+
+      </div>
+
+      <div class="contact-card">
+
+        <div class="contact-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+
+        <h3>Support</h3>
+
+        <p>
+          Need help with the app? <br>
+          support@i-neat.ph
+        </p>
+
+      </div>
+
+      <div class="contact-card">
+
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+
+        <h3>Hotline</h3>
+
+        <p>
+          Heat emergency support <br>
+          +63 917 123 4567
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+
+      <!-- FORM -->
+      <div class="form-card">
+
+        <h2 class="section-title">
+          Send Us a Message
+        </h2>
+
+        <form id="contactForm">
+
+          <div class="input-group">
+            <label>Your Name</label>
+            <input type="text" id="nameInput" placeholder="Juan dela Cruz" required>
+          </div>
+
+          <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="emailInput" placeholder="you@example.com" required>
+          </div>
+
+          <div class="input-group">
+            <label>Subject</label>
+            <input type="text" id="subjectInput" placeholder="How can we help?" required>
+          </div>
+
+          <div class="input-group">
+            <label>Message</label>
+            <textarea id="messageInput" placeholder="Tell us more about your inquiry..." required></textarea>
+          </div>
+
+          <button type="submit" class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          </button>
+
+          <div class="form-status" id="formStatus">
+            Message prepared successfully.
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- SIDE -->
+      <div class="side-panel">
+
+        <!-- OFFICE -->
+        <div class="office-card">
+
+          <div class="office-header">
+            <i class="fas fa-location-dot"></i>
+            <h3>Our Office</h3>
+          </div>
+
+          <p>
+            I-neat Innovation Hub <br>
+            1234 Taft Avenue, Malate <br>
+            Manila, Metro Manila 1004 <br>
+            Philippines
+          </p>
+
+          <div class="map-box">
+            <iframe
+              src="https://www.google.com/maps?q=Taft%20Avenue%20Malate%20Manila%20Philippines&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Taft+Avenue+Malate+Manila+Philippines" target="_blank">
+            <i class="fas fa-diamond-turn-right"></i>
+            Open in Google Maps
+          </a>
+
+        </div>
+
+        <!-- FOLLOW -->
+        <div class="follow-card">
+
+          <h3>Follow Us</h3>
+
+          <p>
+            Stay updated with the latest heat alerts,
+            tips, and community stories.
+          </p>
+
+          <div class="socials">
+
+            <a href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="#">
+              <i class="fab fa-github"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- EMERGENCY -->
+        <div class="emergency-card">
+
+          <h3>Emergency?</h3>
+
+          <p>
+            If you're experiencing heat exhaustion
+            or heatstroke symptoms, call emergency
+            services immediately.
+          </p>
+
+          <div class="emergency-number">
+            911
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-wrapper">
+
+      <h2 class="faq-title">
+        Frequently Asked Questions
+      </h2>
+
+      <!-- FAQ ITEM -->
+      <div class="faq-item">
+
+        <button class="faq-question">
+          How accurate are the heat predictions?
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            I-neat uses real-time weather APIs and
+            heat-index analysis to provide highly
+            accurate predictions and recommendations.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- FAQ ITEM -->
+      <div class="faq-item">
+
+        <button class="faq-question">
+          Is it available outside Metro Manila?
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. I-neat supports multiple cities and
+            continuously expands coverage nationwide.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- FAQ ITEM -->
+      <div class="faq-item">
+
+        <button class="faq-question">
+          How can I contribute cool zone data?
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            Users can submit verified cool zones through
+            the Cool Finder feature inside the platform.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- FAQ ITEM -->
+      <div class="faq-item">
+
+        <button class="faq-question">
+          Is there a mobile app?
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="faq-answer">
+          <p>
+            The mobile app is currently in development
+            and will be available soon for Android and iOS.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-container">
+
+      <img src="i-neat_logo.png" class="footer-logo">
+
+      <div class="footer-text">
+        <h2>I-neat</h2>
+        <p>Stay Cool, Stay Safe</p>
+        <p>Turning the heat into data you can act on</p>
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+    const hamBtn = document.getElementById('hamBtn');
+    const flyMenu = document.getElementById('flyMenu');
+    const featToggle = document.getElementById('featuresToggle');
+    const featuresSub = document.getElementById('featuresSub');
+    const chevron = document.getElementById('chevron');
+    
+    document.addEventListener('click', (e) => {
+    if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+      flyMenu.classList.remove('open');
+    }
+  });
+
+    // Mobile Menu
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      flyMenu.classList.toggle('open');
+    });
+
+    featToggle.addEventListener('click', () => {
+      featuresSub.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!flyMenu.contains(e.target) && e.target !== hamBtn) {
+        flyMenu.classList.remove('open');
+      }
+      if (desktopFeaturesMenu && !desktopFeaturesToggle.contains(e.target)) {
+        desktopFeaturesMenu.classList.remove('open');
+        desktopFeaturesToggle.classList.remove('active');
+      }
+    });
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+
+      const button = item.querySelector('.faq-question');
+
+      button.addEventListener('click', () => {
+
+        item.classList.toggle('active');
+
+      });
+
+    });
+
+    
+    const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      const message = document.getElementById('messageInput').value.trim();
+
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+      const mailtoLink = `mailto:hello@i-neat.ph?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      formStatus.style.display = 'block';
+      formStatus.innerHTML = 'Your message is ready. Your email app will open so you can send it to I-neat.';
+
+      window.location.href = mailtoLink;
+
+      setTimeout(() => {
+        form.reset();
+      }, 700);
+    });
+
+  </script>
+
+</body>
+</html>
